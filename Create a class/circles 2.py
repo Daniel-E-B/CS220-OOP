@@ -1,5 +1,6 @@
 import Tkinter # built-in Python graphics library
 import random
+import cmath
 
 game_objects = []
 
@@ -29,6 +30,34 @@ class Circle:
                            fill=self.color, outline="black")
 
 
+class Square:
+    def __init__(self, x, y):
+
+        self.x = random.randint(0, 400)
+        self.y = random.randint(0,400)
+        self.x_speed = random.randint(-5,5)
+        self.y_speed = random.randint(-5,5)
+        # this creates a random hex string between #000000 and #ffffff
+        # we draw it with an outline, so we'll be able to see it on a white background regardless
+        self.color = '#{0:0>6x}'.format(random.randint(00,16**6))
+        self.size = random.randint(5,75)
+
+    def update(self):
+        '''Update current location by speed.'''
+
+        self.x += self.x_speed
+        self.y += self.y_speed
+
+    def draw(self, canvas):
+        canvas.create_rectangle(self.x, self.y, self.x+self.size,
+         self.y+self.size, fill=self.color, outline="blue")
+        
+
+def addSquare(event):
+
+    global game_objects
+    game_objects.append(Square(event.x, event.y))
+
 def addCircle(event):
     '''Add a new circle where the user clicked.'''
 
@@ -49,9 +78,28 @@ def draw(canvas):
     canvas.delete(Tkinter.ALL)
 
     global game_objects
-    for game_object in game_objects:
-        game_object.update()
-        game_object.draw(canvas)
+    for i in game_objects:
+
+        for j in game_objects:
+            a=i.x-j.x
+            b=i.y-j.y
+            e=a**2+b**2
+            c=cmath.sqrt(e)
+            d=i.size+j.size
+            if c.real<d:
+                i.x_speed=i.x_speed*(-1)
+                j.x_speed=j.x_speed*(-1)
+
+                i.x+=10
+                i.y+=10
+                j.x-=10
+                j.y-=10
+
+                i.y_speed=i.y_speed*(-1)
+                j.y_speed=j.y_speed*(-1)
+
+        i.update()
+        i.draw(canvas)
 
     delay = 33 # milliseconds, so about 30 frames per second
     canvas.after(delay, draw, canvas) # call this draw function with the canvas argument again after the delay
@@ -70,6 +118,7 @@ if __name__ == '__main__':
     # if the user presses a key or the mouse, call our handlers
     root.bind('<Key-r>', reset)
     root.bind('<Button-1>', addCircle)
+    root.bind('<Key-s>', addSquare)
 
     # start the draw loop
     draw(canvas)
