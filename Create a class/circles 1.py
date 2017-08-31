@@ -32,8 +32,8 @@ class Circle:
 class Square:
     def __init__(self, x, y):
 
-        self.x = x
-        self.y = y
+        self.x = random.randint(0, 400)
+        self.y = random.randint(0,400)
         self.x_speed = random.randint(-5,5)
         self.y_speed = random.randint(-5,5)
         # this creates a random hex string between #000000 and #ffffff
@@ -98,7 +98,7 @@ if __name__ == '__main__':
     # if the user presses a key or the mouse, call our handlers
     root.bind('<Key-r>', reset)
     root.bind('<Button-1>', addCircle)
-    root.bind('<Button-2>', addSquare)
+    root.bind('<Key-s>', addSquare)
 
     # start the draw loop
     draw(canvas)
