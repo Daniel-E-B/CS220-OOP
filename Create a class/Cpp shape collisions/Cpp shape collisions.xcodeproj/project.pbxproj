@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		96504CD21F589559005F3044 /* ResourcePath.mm in Sources */ = {isa = PBXBuildFile; fileRef = 96504CD11F589559005F3044 /* ResourcePath.mm */; };
 		96504CD51F589559005F3044 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 96504CD41F589559005F3044 /* main.cpp */; };
-		96504CE51F58B758005F3044 /* arial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 96504CE41F58B758005F3044 /* arial.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -17,7 +16,6 @@
 		96504CD01F589559005F3044 /* Cpp shape collisions-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Cpp shape collisions-Info.plist"; sourceTree = "<group>"; };
 		96504CD11F589559005F3044 /* ResourcePath.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = ResourcePath.mm; sourceTree = "<group>"; };
 		96504CD41F589559005F3044 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
-		96504CE41F58B758005F3044 /* arial.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = arial.ttf; path = "../../MSVS_Neural Net/arial.ttf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -50,7 +48,6 @@
 		96504CCE1F589559005F3044 /* Cpp shape collisions */ = {
 			isa = PBXGroup;
 			children = (
-				96504CE41F58B758005F3044 /* arial.ttf */,
 				96504CD11F589559005F3044 /* ResourcePath.mm */,
 				96504CD41F589559005F3044 /* main.cpp */,
 				96504CD61F589559005F3044 /* Resources */,
@@ -132,7 +129,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				96504CE51F58B758005F3044 /* arial.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -292,6 +288,7 @@
 				96504CE31F589559005F3044 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
