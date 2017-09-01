@@ -108,6 +108,7 @@ int main()
 
 	srand(time(NULL));
 	sf::RenderWindow window(sf::VideoMode(1920, 1080), "Shape Collisions");
+	window.setVerticalSyncEnabled(true);
 	while(window.isOpen()){
 		
 	sf::Event event;
@@ -132,7 +133,15 @@ int main()
 		}
 
 	}
-
+		//collision checks
+		for(int i=0; i<gameObjects.size(); ++i){
+			for(int j=0; j<gameObjects.size(); ++j){
+				if(gameObjects[i].shape.getGlobalBounds().intersects(gameObjects[j].shape.getGlobalBounds())){
+					gameObjects[i].shape.rotate(180);
+					gameObjects[j].shape.rotate(-180);
+				}
+			}
+		}
 	window.clear(sf::Color::White);
 	for(int i=0; i<gameObjects.size(); ++i){
 		window.draw(gameObjects[i].shape);
