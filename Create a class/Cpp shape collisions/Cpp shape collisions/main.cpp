@@ -3,111 +3,111 @@
 #include <SFML/System.hpp>
 #include <SFML/Network.hpp>
 #include <cstdlib>
+#include <cmath>
 #include <vector>
 
 using namespace std;
 
-class Shape{
-private:
-		sf::RectangleShape shape;
 
+class Shape{
 public:
-	double x_speed,y_speed;
-	
-	Shape(){
-		srand(time(NULL));
-		shape.setPosition(rand()%800, rand()%600);
-		shape.setFillColor(sf::Color(rand()%255, rand()%255, rand()%255, 255));
-		shape.setOutlineColor(sf::Color::Black);
-		x_speed=rand()%50;
-		y_speed=rand()%50;
-		shape.setSize(sf::Vector2f(rand()%100, rand()%100));
-	}
+	double speed, direction;
 	void update(){
-		shape.move(x_speed, y_speed);
+		shape.move(speed*cos(direction), speed*sin(direction));
 	}
-	sf::RectangleShape getShape(){
-		return shape;
-	}
-	void sDraw(sf::RenderWindow w)
-	{
-		w.draw(shape);
-	}
+	sf::ConvexShape shape;
 };
 
+
+class Quadrilateral: public Shape{
+public:
+
+	Quadrilateral(){
+		shape.setPosition(rand()%1920, rand()%1080);
+		shape.setFillColor(sf::Color(rand()%255, rand()%255, rand()%255, 255));
+		shape.setOutlineColor(sf::Color::Black);
+		speed=0.5;
+		direction=rand()%360;
+		shape.setPointCount(4);
+		shape.setPoint(0, sf::Vector2f(0,0));
+		shape.setPoint(1, sf::Vector2f(0,rand()%100));
+		shape.setPoint(2, sf::Vector2f(rand()%100,rand()%100));
+		shape.setPoint(3, sf::Vector2f(rand()%100,0));
+		shape.setOutlineThickness(3);
+	}
+};
 
 class Rect: public Shape{
-private:
-	sf::RectangleShape shape;
-
 public:
+	
 	Rect(){
-		srand(time(NULL));
-		shape.setPosition(rand()%800, rand()%600);
+		shape.setPosition(rand()%1920, rand()%1080);
 		shape.setFillColor(sf::Color(rand()%255, rand()%255, rand()%255, 255));
 		shape.setOutlineColor(sf::Color::Black);
-		x_speed=rand()%50;
-		y_speed=rand()%50;
-		shape.setSize(sf::Vector2f(rand()%100, rand()%100));
-	}
-	sf::RectangleShape getShape(){
-		return shape;
+		speed=0.5;
+		direction=rand()%360;
+		float cornerX=rand()%100;
+		float cornerY=rand()%100;
+		shape.setPointCount(4);
+		shape.setPoint(0, sf::Vector2f(0,0));
+		shape.setPoint(1, sf::Vector2f(0,cornerY));
+		shape.setPoint(2, sf::Vector2f(cornerX,cornerY));
+		shape.setPoint(3, sf::Vector2f(cornerX,0));
+		shape.setOutlineThickness(3);
 	}
 };
 
-class Circle: public Shape{
-private:
-	sf::CircleShape shape;
-	
+class Triangle: public Shape{
 public:
-	Circle(){
-		srand(time(NULL));
-		shape.setPosition(rand()%800, rand()%600);
+
+	Triangle(){
+		shape.setPosition(rand()%1920, rand()%1080);
 		shape.setFillColor(sf::Color(rand()%255, rand()%255, rand()%255, 255));
 		shape.setOutlineColor(sf::Color::Black);
-		x_speed=rand()%50;
-		y_speed=rand()%50;
-		shape.setRadius(rand()%100);
-	}
-	sf::CircleShape getShape(){
-		return shape;
+		speed=0.5;
+		direction=rand()%360;
+		shape.setOutlineThickness(3);
+		float p1x=rand()%100;
+		float p2x=rand()%100;
+		float p1y=rand()%100;
+		float p2y=rand()%100;
+		shape.setPointCount(3);
+		shape.setPoint(0,sf::Vector2f(0, 0));
+		shape.setPoint(1, sf::Vector2f(p1x, p1y));
+		shape.setPoint(2, sf::Vector2f(p2x,p2y));
 	}
 };
 
 class Square: public Shape{
-private:
-	sf::RectangleShape shape;
-	
 public:
+
 	int size=0;
 
 	Square(){
-		srand(time(NULL));
-		shape.setPosition(rand()%800, rand()%600);
+		shape.setPosition(rand()%1920, rand()%1080);
 		shape.setFillColor(sf::Color(rand()%255, rand()%255, rand()%255, 255));
 		shape.setOutlineColor(sf::Color::Black);
-		x_speed=rand()%50;
-		y_speed=rand()%50;
+		speed=0.5;
+		direction=rand()%360;
 		size=rand()%100;
-		shape.setSize(sf::Vector2f(size,size));
+		shape.setOutlineThickness(3);
+		shape.setPointCount(4);
+		float corner=rand()%100;
+		shape.setPoint(0, sf::Vector2f(0,0));
+		shape.setPoint(1, sf::Vector2f(0,corner));
+		shape.setPoint(2, sf::Vector2f(corner,corner));
+		shape.setPoint(3, sf::Vector2f(corner,0));
 	}
-	
 };
 
 vector<Shape>gameObjects;
-sf::Font font;
-sf::Text text;
 int shapeSelect=0;
 
 int main()
 {
-	font.loadFromFile("arial.ttf");
-	text.setFont(font);
-	text.setPosition(100,100);
-	text.setCharacterSize(30);
-	text.setFillColor(sf::Color::Black);
+
 	srand(time(NULL));
-	sf::RenderWindow window(sf::VideoMode(800, 600), "Shape Collisions");
+	sf::RenderWindow window(sf::VideoMode(1920, 1080), "Shape Collisions");
 	while(window.isOpen()){
 		
 	sf::Event event;
@@ -116,29 +116,28 @@ int main()
 		if (event.type == sf::Event::Closed)
 			window.close();
 		
-		/*if(event.type==sf::Event::KeyPressed){
-			if(event.key.code==sf::Keyboard::S){
-				shapeSelect=rand()%2;
-				text.setString(to_string(shapeSelect));
+		if(event.type==sf::Event::MouseButtonPressed){
+			if(event.mouseButton.button==sf::Mouse::Left){
+				shapeSelect=rand()%3;
 				if(shapeSelect==0){
-					gameObjects.push_back(Circle());
+					gameObjects.push_back(Rect());
 				}else if(shapeSelect==1){
-					gameObjects.push_back(Circle());
+					gameObjects.push_back(Square());
 				}else if (shapeSelect==2){
-					gameObjects.push_back(Circle());
-
+					gameObjects.push_back(Triangle());
+				}else{
+					gameObjects.push_back(Quadrilateral());
 				}
 			}
-		}*/
+		}
 
 	}
-		gameObjects.push_back(Circle());
+
 	window.clear(sf::Color::White);
 	for(int i=0; i<gameObjects.size(); ++i){
-		window.draw(gameObjects[i].getShape());
-		//gameObjects[i].sDraw(window);
+		window.draw(gameObjects[i].shape);
+		gameObjects[i].update();
 	}
-	window.draw(text);
 	window.display();
 	}
     return 0;
