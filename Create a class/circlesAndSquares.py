@@ -3,43 +3,14 @@ import random
 
 game_objects = []
 
-class Circle:
-    def __init__(self, x, y):
-        '''Create a new circle at the given x,y point with a random speed, color, and size.'''
-
-        self.x = x
-        self.y = y
-        self.x_speed = random.randint(-5,5)
-        self.y_speed = random.randint(-5,5)
-        # this creates a random hex string between #000000 and #ffffff
-        # we draw it with an outline, so we'll be able to see it on a white background regardless
+class Shape:
+    def __init__(self):
         self.color = '#{0:0>6x}'.format(random.randint(00,16**6))
         self.size = random.randint(5,75)
-
-    def update(self):
-        '''Update current location by speed.'''
-
-        self.x += self.x_speed
-        self.y += self.y_speed
-
-    def draw(self, canvas):
-        '''Draw self on the canvas.'''
-
-        canvas.create_oval(self.x, self.y, self.x + self.size, self.y + self.size,
-                           fill=self.color, outline="black")
-
-
-class Square:
-    def __init__(self, x, y):
-
-        self.x = random.randint(0, 400)
+        self.x = random.randint(0,400)
         self.y = random.randint(0,400)
         self.x_speed = random.randint(-5,5)
         self.y_speed = random.randint(-5,5)
-        # this creates a random hex string between #000000 and #ffffff
-        # we draw it with an outline, so we'll be able to see it on a white background regardless
-        self.color = '#{0:0>6x}'.format(random.randint(00,16**6))
-        self.size = random.randint(5,75)
 
     def update(self):
         '''Update current location by speed.'''
@@ -48,20 +19,24 @@ class Square:
         self.y += self.y_speed
 
     def draw(self, canvas):
-        canvas.create_rectangle(self.x, self.y, self.x+self.size,
-         self.y+self.size, fill=self.color, outline="blue")
+         canvas.create_rectangle(self.x, self.y, self.x+self.size,
+        self.y+self.size, fill=self.color)
         
 
-def addSquare(event):
+class Circle(Shape):
+    def draw(self, canvas):
+        canvas.create_oval(self.x, self.y, self.x+self.size, self.y+self.size, fill=self.color)
 
+def addSquare(event):
     global game_objects
-    game_objects.append(Square(event.x, event.y))
+    game_objects.append(Shape())
+
 
 def addCircle(event):
     '''Add a new circle where the user clicked.'''
 
     global game_objects
-    game_objects.append(Circle(event.x, event.y))
+    game_objects.append(Circle())
 
 
 def reset(event):
@@ -77,10 +52,12 @@ def draw(canvas):
     canvas.delete(Tkinter.ALL)
 
     global game_objects
-    for game_object in game_objects:
-        game_object.update()
-        game_object.draw(canvas)
+    for i in game_objects:
+        if(i.x<0 or i.x>400 or i.y<0 or i.y>400):
+            game_objects.remove(i)
 
+        i.update()
+        i.draw(canvas)
     delay = 33 # milliseconds, so about 30 frames per second
     canvas.after(delay, draw, canvas) # call this draw function with the canvas argument again after the delay
 
@@ -102,6 +79,5 @@ if __name__ == '__main__':
 
     # start the draw loop
     draw(canvas)
-
     root.mainloop() # keep the window open
 
