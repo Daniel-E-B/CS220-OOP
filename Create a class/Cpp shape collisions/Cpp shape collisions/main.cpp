@@ -181,7 +181,7 @@ int main()
 		
 		if(event.type==sf::Event::MouseButtonPressed){
 			if(event.mouseButton.button==sf::Mouse::Left){
-				shapeSelect=rand()%3;
+				shapeSelect=rand()%4;
 				if(shapeSelect==0){
 					gameObjects.push_back(Rect());
 				}else if(shapeSelect==1){
