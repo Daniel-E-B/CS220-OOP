@@ -47,8 +47,8 @@ def draw(canvas):
     global game_objects
     for i in game_objects:
         for j in game_objects:
-            a=i.x-j.x
-            b=i.y-j.y
+            a=i.x+i.size/2-j.x+j.size/2
+            b=i.y+i.size/2-j.y+i.size/2
             e=a**2+b**2
             c=cmath.sqrt(e)
             d=i.size+j.size
@@ -56,10 +56,7 @@ def draw(canvas):
                 i.x_speed=i.x_speed*(-1)
                 j.x_speed=j.x_speed*(-1)
 
-                i.x+=10
-                i.y+=10
-                j.x-=10
-                j.y-=10
+
 
                 i.y_speed=i.y_speed*(-1)
                 j.y_speed=j.y_speed*(-1)
