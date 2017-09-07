@@ -73,4 +73,3 @@ if __name__ == '__main__':
     # start the draw loop
     draw(canvas)
     root.mainloop() # keep the window open
-
