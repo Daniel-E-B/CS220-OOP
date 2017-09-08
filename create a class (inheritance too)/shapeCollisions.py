@@ -46,9 +46,9 @@ def draw(canvas):
 
     global game_objects
 
-    for i in game_objects:
-
-        for k in range(game_objects.index(i)+1,len(game_objects)):
+    for l in range(0, len(game_objects)-1):
+        i=game_objects[l]
+        for k in range(game_objects.index(i)+1,len(game_objects)-1):
             j=game_objects[k]
             a=i.x+i.size/2-j.x+j.size/2
             b=i.y+i.size/2-j.y+i.size/2
@@ -68,7 +68,7 @@ def draw(canvas):
         i.draw(canvas)
         if(i.x<0 or i.x>400 or i.y<0 or i.y>400):
              game_objects.remove(i)
-             i-=1
+             l-=1
 
     delay = 33 # milliseconds, so about 30 frames per second
     canvas.after(delay, draw, canvas) # call this draw function with the canvas argument again after the delay
