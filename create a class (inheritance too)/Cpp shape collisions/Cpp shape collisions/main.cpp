@@ -40,30 +40,25 @@ public:
 		++interval;
 		
 		//collision checks:
-		for(int i=0; i<shapes.size();++i){
 			for(int j=0; j<shapes.size();++j){
-				if(shapes[i].shape.getGlobalBounds().intersects(shapes[j].shape.getGlobalBounds())){
+				if(shape.getGlobalBounds().intersects(shapes[j].shape.getGlobalBounds())){
 					//if two shapes intersect, the one with the longer first sidelength wins
-					if(distance(shapes[i].shape.getPoint(0).x, shapes[i].shape.getPoint(1).x,shapes[i].shape.getPoint(0).y, shapes[i].shape.getPoint(0).y)>distance(shapes[j].shape.getPoint(0).x,shapes[j].shape.getPoint(1).x,shapes[j].shape.getPoint(0).y,shapes[j].shape.getPoint(1).y)){
+					if(distance(shape.getPoint(0).x, shape.getPoint(1).x,shape.getPoint(0).y, shape.getPoint(0).y)>distance(shapes[j].shape.getPoint(0).x,shapes[j].shape.getPoint(1).x,shapes[j].shape.getPoint(0).y,shapes[j].shape.getPoint(1).y)){
 						//if shape i wins,
 						//you can't convert somebody on your team!!
-						if(shapes[j].shape.getFillColor()!=shapes[i].shape.getFillColor()){
-						shapes[i].interval=0;
-						shapes[j].shape.setFillColor(shapes[i].shape.getFillColor());
+						if(shapes[j].shape.getFillColor()!=shape.getFillColor()){
+						interval=0;
+						shapes[j].shape.setFillColor(shape.getFillColor());
 						}
 					}else{
 						//if shape j wins,
-						if(shapes[j].shape.getFillColor()!=shapes[i].shape.getFillColor()){
+						if(shapes[j].shape.getFillColor()!=shape.getFillColor()){
 						shapes[j].interval=0;
-						shapes[i].shape.setFillColor(shapes[j].shape.getFillColor());
+						shape.setFillColor(shapes[j].shape.getFillColor());
 						}
 					}
 				}
 			}
-			if(shapes[i].interval>=1000){
-				shapes.erase(shapes.begin()+i);
-			}
-		}
 		
 		window.draw(shape);
 	}
@@ -195,6 +190,14 @@ int main()
 		}
 
 	}
+		
+	//erase dead shapes
+	for(int i=0; i<gameObjects.size(); ++i){
+		if(gameObjects[i].interval>=1000){
+			gameObjects.erase(gameObjects.begin()+i);
+		}
+	}
+		
 	window.clear(sf::Color::White);
 	for(int i=0; i<gameObjects.size(); ++i){
 		gameObjects[i].update(window, gameObjects, gameBounds);

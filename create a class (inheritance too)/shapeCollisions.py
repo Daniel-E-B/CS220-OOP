@@ -61,7 +61,9 @@ def draw(canvas):
                 k.y_speed*=(-1)
 
 
-    
+
+
+
     delay = 33 # milliseconds, so about 30 frames per second
     canvas.after(delay, draw, canvas) # call this draw function with the canvas argument again after the delay
 
