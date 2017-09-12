@@ -12,7 +12,7 @@ class Dealer:
 
     def deal(self):
         for i in range (0,self.players):
-            card=random.randint(0,12)
+            card=random.randint(0,len(self.cards)-1)
             if self.winnerCard<card:
                 self.winner=i
                 self.winnerCard=card
