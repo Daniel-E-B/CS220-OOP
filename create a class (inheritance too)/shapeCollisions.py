@@ -46,30 +46,22 @@ def draw(canvas):
 
     global game_objects
 
-    for l in range(0, len(game_objects)-1):
-        i=game_objects[l]
-        for k in range(game_objects.index(i)+1,len(game_objects)-1):
-            j=game_objects[k]
-            a=i.x+i.size/2-j.x+j.size/2
-            b=i.y+i.size/2-j.y+i.size/2
-            e=a**2+b**2
-            c=cmath.sqrt(e)
-            d=i.size+j.size
-            if c.real<d:
-                i.x_speed=i.x_speed*(-1)
-                j.x_speed=j.x_speed*(-1)
+    for x in game_objects:
+        x.update()
+        x.draw(canvas)
+    
+    #collisions:
+    for i in range(0, len(game_objects)-1):
+        k=game_objects[i]
+        for j in range(i+1, len(game_objects)-1):
+            l=game_objects[j]
+            dist=cmath.sqrt(pow((k.x-l.x),2)+pow((k.y-l.y),2))
+            if dist.real>l.size/2+k.size:
+                k.x_speed*=(-1)
+                k.y_speed*=(-1)
 
 
-
-                i.y_speed=i.y_speed*(-1)
-                j.y_speed=j.y_speed*(-1)
-
-        i.update()
-        i.draw(canvas)
-        if(i.x<0 or i.x>400 or i.y<0 or i.y>400):
-             game_objects.remove(i)
-             l-=1
-
+    
     delay = 33 # milliseconds, so about 30 frames per second
     canvas.after(delay, draw, canvas) # call this draw function with the canvas argument again after the delay
 
