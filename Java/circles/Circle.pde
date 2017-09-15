@@ -1,10 +1,11 @@
 class Circle {
     float x;
     float y;
-    float xSpeed;
-    float ySpeed;
     color fillColor;
     float diameter;
+    float radius;
+    float speed=0;
+    float angle=0;
     
     /*
       Create a new circle at the given x,y point with a
@@ -14,8 +15,10 @@ class Circle {
 
         this.x = x; 
         this.y = y;
-        this.xSpeed = random(-5,5);
-        this.ySpeed = random(-5,5);
+        while(speed==0){
+          this.speed = random(-5, 5);//make sure that shapes have to move
+        }
+        this.angle=random(0, 359);
         // this creates a random color. We draw it with an
         // outline, so we'll be able to see it on a white
         // background regardless
@@ -23,12 +26,19 @@ class Circle {
                                random(0,255),
                                random(0,255));
         this.diameter = random(5,75);
+        this.radius = this.diameter/2;
     }
 
     /* Update current location by speed. */
     public void update() {
-        this.x += this.xSpeed;
-        this.y += this.ySpeed;
+        //move the shapes
+        this.x += speed*sin(this.angle);
+        this.y += speed*cos(this.angle);
+        
+        //check for collisions with borders
+        if(this.x<this.radius||this.x>width-this.radius||this.y<this.radius||this.y>height-this.radius){
+          this.angle+=(180);
+        }
     }
     
     /* Draw self on the canvas. */
