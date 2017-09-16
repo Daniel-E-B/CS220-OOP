@@ -2,7 +2,6 @@ class Circle {
     float x;
     float y;
     color fillColor;
-    float diameter;
     float radius;
     float speed=0;
     float angle=0;
@@ -25,8 +24,8 @@ class Circle {
         this.fillColor = color(random(0,255),
                                random(0,255),
                                random(0,255));
-        this.diameter = random(5,75);
-        this.radius = this.diameter/2;
+                               
+        this.radius = random(5,height/12);//yay for arbitrary numbers
     }
 
     /* Update current location by speed. */
@@ -41,10 +40,14 @@ class Circle {
         }
     }
     
+    public void eat(Circle c){
+        this.radius+=c.radius;
+    }
+    
     /* Draw self on the canvas. */
     public void display() {
         fill(this.fillColor);
         stroke(0, 0, 0); // makes a black outline
-        ellipse(this.x, this.y, this.diameter, this.diameter);
+        ellipse(this.x, this.y, this.radius*2, this.radius*2);
     }
 }
