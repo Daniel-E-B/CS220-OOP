@@ -10,31 +10,14 @@ void reset() {
     gameObjects = new ArrayList<Circle>();
 }
 
-float distance(float x1, float y1, float x2, float y2){
-  return sqrt((pow((x1-x2),2)+pow((y1-y2),2)));
-}
 
-void collisionChecks(){
-    for(int i=0; i<gameObjects.size(); ++i){
-      for(int j=0; j<gameObjects.size(); ++j){
-        if(gameObjects.get(i).radius+gameObjects.get(j).radius<=distance(gameObjects.get(i).x, 
-            gameObjects.get(i).y, gameObjects.get(j).x, gameObjects.get(j).y)){
-          if(gameObjects.get(i).radius<gameObjects.get(j).radius){
-             gameObjects.get(j).eat(gameObjects.get(i));
-          }else{
-            gameObjects.get(i).eat(gameObjects.get(j));
-          }
-        }
-      }
-    }
-}
 
 /* 
   Processing will automatically call this once when the
   program first starts running.
 */
 void setup() {
-  size(1024, 768);
+  size(400, 400);
 }
 
 /* 
@@ -45,10 +28,18 @@ void setup() {
 void draw() {
     background(255, 255, 255);
     
-    for (Circle gameObject : gameObjects) {
-        gameObject.update();
-        gameObject.display();
-    }
+    
+     Iterator<Circle> gameTick=gameObjects.iterator();
+        while(gameTick.hasNext()){
+          Circle element=gameTick.next();
+          element.update(gameObjects);
+          element.display();
+          //kill dead circles
+          if(element.die){
+            gameTick.remove();
+          }
+        }
+    
 }
 
 /* Processing will call this when a key is pressed. */
