@@ -32,12 +32,13 @@ void draw() {
      Iterator<Circle> gameTick=gameObjects.iterator();
         while(gameTick.hasNext()){
           Circle element=gameTick.next();
-          element.update(gameObjects);
-          element.display();
           //kill dead circles
           if(element.die){
             gameTick.remove();
           }
+          element.update(gameObjects);
+          element.display();
+
         }
     
 }
