@@ -28,7 +28,6 @@ void setup() {
 void draw() {
     background(255, 255, 255);
     
-    
      Iterator<Circle> gameTick=gameObjects.iterator();
         while(gameTick.hasNext()){
           Circle element=gameTick.next();

@@ -7,9 +7,10 @@ class Circle {
     float radius;
     float speed=0;
     float angle=0;
-    float wallBuffer=0.85;
     boolean die=false;
     int bounces=0;
+    Collidable collision = new Collidable();
+    Eatable eatCheck = new Eatable();
     
     /*
       Create a new circle at the given x,y point with a
@@ -41,42 +42,14 @@ class Circle {
     /* Update current location by speed. */
     public void update(ArrayList<Circle> gameObjects) {
         //move the shapes
-        this.x += speed*sin(this.angle);
-        this.y += speed*cos(this.angle);
-        
-        //check for collisions with wallBuffer for no spazzing
-        if(this.x<this.radius||this.x>width-this.radius||this.y<this.radius||this.y>height-this.radius){
-          this.angle+=(180);
-          this.speed*=-1;
-          //make a spazz detector that makes a big circle split into smaller ones
-        }else{
-          bounces=0;
-        }
-       
-
-       //check for collisions
-        for(int i=0; i<gameObjects.size(); ++i){
-          for(int j=i+1; j<gameObjects.size(); ++j){
-            if(gameObjects.get(i).radius+gameObjects.get(j).radius>distance(gameObjects.get(i).x, 
-                gameObjects.get(i).y, gameObjects.get(j).x, gameObjects.get(j).y)){
-              if(gameObjects.get(i).radius<gameObjects.get(j).radius){
-                 gameObjects.get(j).eat(gameObjects.get(i));
-                 gameObjects.get(i).die=true;
-              }else{
-                gameObjects.get(i).eat(gameObjects.get(j));
-                gameObjects.get(j).die=true;
-              }
-            }
-          }
-        }
-        
+        this.x += this.speed*sin(this.angle);
+        this.y += this.speed*cos(this.angle);
+        this.collision.collide(this);//check for collisions with wall and bounce
+          this.radius+=eatCheck.eat(this, gameObjects);//dumb way of growing
     }
   
     
-    public void eat(Circle c){//should be a boolean function that returns true if the shape should be eaten. 
-                                //Make class eatable that Circle and Food composite from
-        this.radius+=c.radius;//super dumb, fix it
-    }
+
     
     /* Draw self on the canvas. */
     public void display() {
