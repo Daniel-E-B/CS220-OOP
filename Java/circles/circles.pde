@@ -1,16 +1,18 @@
-ArrayList<Circle> gameObjects = new ArrayList<Circle>();
+ArrayList<Circle> Players = new ArrayList<Circle>();
+ArrayList<Circle> Foods = new ArrayList<Circle>();
+
 
 /* Add a new circle at x, y. */
 void addCircle(int x, int y) {
-    gameObjects.add(new Circle(x, y));
+    Players.add(new Circle(x, y));
 }
 
 /* Clear all game objects. */
 void reset() {
-    gameObjects = new ArrayList<Circle>();
+    Players = new ArrayList<Circle>();
+    Foods = new ArrayList<Circle>();
+    //for loop of array.add with random x's and y's
 }
-
-
 
 /* 
   Processing will automatically call this once when the

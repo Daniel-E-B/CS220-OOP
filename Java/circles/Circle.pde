@@ -1,5 +1,6 @@
 import java.util.Iterator;
-
+//the next thing to do is agar.io ify it and add food pellets and make the circle follow the mouse
+//fragment into a parent class of gameObject, and children of food and player
 class Circle {
     float x;
     float y;
@@ -11,6 +12,7 @@ class Circle {
     int bounces=0;
     Collidable collision = new Collidable();
     Eatable eatCheck = new Eatable();
+    boolean isFood=false;
     
     /*
       Create a new circle at the given x,y point with a
@@ -42,10 +44,13 @@ class Circle {
     /* Update current location by speed. */
     public void update(ArrayList<Circle> gameObjects) {
         //move the shapes
-        this.x += this.speed*sin(this.angle);
-        this.y += this.speed*cos(this.angle);
-        this.collision.collide(this);//check for collisions with wall and bounce
+        if(!isFood){
+          this.x += this.speed*sin(this.angle);
+          this.y += this.speed*cos(this.angle);
+          this.collision.collide(this);//check for collisions with wall and bounce
           this.radius+=eatCheck.eat(this, gameObjects);//dumb way of growing
+        }
+
     }
   
     
