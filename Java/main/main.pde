@@ -26,7 +26,6 @@ void reset() {
     Players = new ArrayList<Player>();
     Players.add(new Player(width/2, height/2));
     Foods = new ArrayList<Food>();
-    //for loop of array.add with random x's and y's
     initFood(height/25);
 
 }
@@ -41,6 +40,8 @@ void setup() {
   frameRate(60);
   initFood(height/25);
   noStroke();
+  textMode(CENTER);
+  textAlign(CENTER);
 }
 
 /* 
@@ -82,8 +83,3 @@ void keyPressed() {
         reset();
     }
 }
-
-/* Processing will call this when the mouse is clicked */
-/*void mouseClicked() {
-    addCircle(mouseX, mouseY);
-}*/

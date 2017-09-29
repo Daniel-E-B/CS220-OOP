@@ -1,6 +1,5 @@
 import java.util.Iterator;
 //the next thing to do is agar.io ify it and add food pellets and make the circle follow the mouse
-//fragment into a parent class of gameObject, and children of food and player
 class Player extends GameObject{
      float xSpeed;
      float ySpeed;
@@ -12,7 +11,7 @@ class Player extends GameObject{
     }
       
 
-    void moveToMouse(){//returns angle to go towards the mouse
+    void moveToMouse(){
       float relativeMouseY=mouseY-this.y;
       float relativeMouseX=mouseX-this.x;
       if(abs(relativeMouseX)>this.radius/10&&abs(relativeMouseY)>this.radius/10){//dont move it if the mouse is over the center of the player
@@ -29,6 +28,13 @@ class Player extends GameObject{
         this.radius*=0.98;//slowly kill player
         framesPassed=0;
       }
+    }
+    
+    void display(){
+      super.display();
+      textSize(radius/2);
+      fill(0);
+      text(int(radius), this.x, this.y);
     }
     
     public void update(ArrayList<Player> playerObjects, ArrayList<Food> foodObjects) {
