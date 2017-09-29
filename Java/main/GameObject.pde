@@ -4,7 +4,6 @@ class GameObject{
     color fillColor;
     float radius;
     float speed=0;
-    float angle=0;
     boolean die=false;
     int bounces=0;
     Collidable collision = new Collidable(true);
@@ -25,7 +24,6 @@ class GameObject{
                                random(0,255),
                                random(0,255));
                                
-        //this.radius = random(5,height/12);//yay for arbitrary numbers
     }
 
      //distance formula

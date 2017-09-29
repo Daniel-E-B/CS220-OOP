@@ -40,6 +40,7 @@ void setup() {
   Players.add(new Player(width/2, height/2));
   frameRate(60);
   initFood(height/25);
+  noStroke();
 }
 
 /* 

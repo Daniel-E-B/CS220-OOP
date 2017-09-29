@@ -7,12 +7,13 @@ class Collidable {
     void collide(Player c){
         if(c.x<c.radius||c.x>width-c.radius||c.y<c.radius||c.y>height-c.radius){
           if(!noBounce){
-            c.angle+=(180);
             c.speed*=-1;
-          }else{
-            c.speed=0;//find some way to 
+          }else{//let it keep moving on one axis when colliding with a border on the other
+            if(c.x<c.radius||c.x>width-c.radius)//fix this later. Move shape along border to see the problem
+              c.xSpeed=0;
+             if(c.y<c.radius||c.y>height-c.radius)
+               c.ySpeed=0;
           }
-          //make a spazz detector that makes a big circle split into smaller ones
         }
     }
 }
