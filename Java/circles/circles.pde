@@ -1,16 +1,17 @@
-ArrayList<Circle> Players = new ArrayList<Circle>();
-ArrayList<Circle> Foods = new ArrayList<Circle>();
-
+ArrayList<Food> Foods = new ArrayList<Food>();
+ArrayList<Player> Players = new ArrayList<Player>();
+//The local player is always in index 0
 
 /* Add a new circle at x, y. */
-void addCircle(int x, int y) {
-    Players.add(new Circle(x, y));
+void addPlayer(int x, int y) {
+    Players.add(new Player(x, y));
 }
 
 /* Clear all game objects. */
 void reset() {
-    Players = new ArrayList<Circle>();
-    Foods = new ArrayList<Circle>();
+    Players = new ArrayList<Player>();
+    Players.add(new Player(width/2, height/2));
+    Foods = new ArrayList<Food>();
     //for loop of array.add with random x's and y's
 }
 
@@ -20,6 +21,8 @@ void reset() {
 */
 void setup() {
   size(400, 400);
+  Players.add(new Player(width/2, height/2));
+  frameRate(30);
 }
 
 /* 
@@ -30,16 +33,15 @@ void setup() {
 void draw() {
     background(255, 255, 255);
     
-     Iterator<Circle> gameTick=gameObjects.iterator();
+    Iterator<Player> gameTick=Players.iterator();//go through other players
         while(gameTick.hasNext()){
-          Circle element=gameTick.next();
+          Player element=gameTick.next();
           //kill dead circles
           if(element.die){
             gameTick.remove();
           }
-          element.update(gameObjects);
+          element.update(Players);
           element.display();
-
         }
     
 }
@@ -52,6 +54,6 @@ void keyPressed() {
 }
 
 /* Processing will call this when the mouse is clicked */
-void mouseClicked() {
+/*void mouseClicked() {
     addCircle(mouseX, mouseY);
-}
+}*/

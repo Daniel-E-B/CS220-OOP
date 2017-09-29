@@ -1,5 +1,5 @@
 class Eatable{
-  float eat(Circle c, ArrayList<Circle> gameObjects){
+  float eat(Player c, ArrayList<Player> gameObjects){
           for(int i=0; i<gameObjects.size(); ++i){
             if(gameObjects.get(i)!=c){
               if(gameObjects.get(i).radius+c.radius>c.distance(gameObjects.get(i).x, 
