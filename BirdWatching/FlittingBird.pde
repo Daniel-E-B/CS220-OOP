@@ -1,30 +1,22 @@
-class FlittingBird {
-  float x;
-  float y;
-  float xSpeed;
+class FlittingBird extends SkyObject{
   float minXSpeed = 2.0;
   float maxXSpeed = 5.0;
   float ySpeed;
   float minYSpeed = -1.0;
   float maxYSpeed = 1.0;
-  float size = 15.0;
-  color fillColor;
 
   FlittingBird() {
-    this.x = random(0, width);
-    this.y = random(0, height);
+    super();
     this.xSpeed = random(minXSpeed, maxXSpeed);
     this.ySpeed = random(minYSpeed, maxYSpeed);
-    this.fillColor = color(random(0,255), random(0,255), random(0,255));
   }
   
   void display() {
-    fill(this.fillColor);
+    super.display();
     ellipse(this.x, this.y, this.size*2, this.size);
   }
   
   void move() {
-    this.x += this.xSpeed;
     this.y += this.ySpeed;
     // if off the right side of the screen
     // move to just off the left side of the screen
