@@ -1,3 +1,12 @@
+/*
+stuff to do to clean up this poor code:
+Create a parent class for FallingFeather, FlittingBird and SoaringBird
+composition is not really needed, interfaces are
+make an interface that requires display() and move()
+make a gameObjects ArrayList and fill it with the required number of objects
+Iterate through it to create, move and display
+*/
+
 SoaringBird sb1;
 SoaringBird sb2;
 SoaringBird sb3;
