@@ -1,6 +1,13 @@
+import processing.net.*;
 ArrayList<Food> Foods = new ArrayList<Food>();
-ArrayList<Player> Players = new ArrayList<Player>();
+//ArrayList<Player> Players = new ArrayList<Player>();
+ArrayList<RemotePlayer> remotePlayers = new ArrayList<RemotePlayer>();
+Player localPlayer = new Player(0,0);
 int foodInterval=120;//every 120 frames, add a food;
+Server s=new Server(this, 24274);
+Client c;
+float data[];//playerID, size, x, y, r, g, b
+String input;
 //The local player is always in index 0
 
 void initFood(int numFoods){
@@ -52,7 +59,23 @@ void setup() {
 void draw() {
     background(255, 255, 255);
     
-    Iterator<Player> gameTick=Players.iterator();//go through other players
+    c=s.available();
+    if(c!=null){
+      //receive and parse packet
+      input = c.readString();//stick this all in a class
+      input=input.substring(0, input.indexOf("\n"));//may not be needed. Cuts of the input up to the newline
+      data=float(split(input, ' '));
+      //check that it is a full packet
+      try{float temp = data[6];} catch(ArrayIndexOutOfBoundsException e){
+      println("array index out of bounds, dropped packet", e);
+      }//bad form. If I change the size of data, I need to change this.
+      RemotePlayer newP=new RemotePlayer(data[0],data[1],data[2],data[3],data[4],data[5],data[6]);
+      for(int i=0; i<remotePlayers.size(); ++i){//check if the client is new
+        if(
+      }
+    }
+    
+    Iterator<Player> gameTick=Players.iterator();//go through players
         while(gameTick.hasNext()){
           Player element=gameTick.next();
           //kill dead circles

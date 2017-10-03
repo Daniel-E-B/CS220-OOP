@@ -4,10 +4,12 @@ class Player extends GameObject{
      float xSpeed;
      float ySpeed;
      int framesPassed=0;//used to subtract health;
+     float playerID;
     public Player (float x, float y) {
         super(x, y);
         this.radius = height/25;//yay for arbitrary numbers. Radius=health
         this.speed=height/200;
+        this.playerID=random(0, 10000);
     }
       
 
