@@ -1,5 +1,4 @@
 class SoaringBird extends BirdObject implements Creature{
-  float xSpeed;
   float minXSpeed = 1.0;
   float maxXSpeed = 3.0;
   float size = 30.0;
@@ -12,6 +11,7 @@ class SoaringBird extends BirdObject implements Creature{
   
   void display() {
     fill(this.fillColor);
+    imageMode(CENTER);
     ellipse(this.x, this.y, this.size*2, this.size);
   }
   

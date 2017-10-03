@@ -1,5 +1,4 @@
 class FallingFeather extends BirdObject implements Creature{
-  float xSpeed;
   float ySpeed;
   float size = 5.0;
 
@@ -12,6 +11,7 @@ class FallingFeather extends BirdObject implements Creature{
   
   void display() {
     fill(this.fillColor);
+    imageMode(CORNER);
     rect(this.x, this.y, this.size*2, this.size);
   }
   

@@ -1,5 +1,4 @@
 class FlittingBird extends BirdObject implements Creature{
-  float xSpeed;
   float minXSpeed = 2.0;
   float maxXSpeed = 5.0;
   float ySpeed;
@@ -16,6 +15,7 @@ class FlittingBird extends BirdObject implements Creature{
   
   void display() {
     fill(this.fillColor);
+    imageMode(CENTER);
     ellipse(this.x, this.y, this.size*2, this.size);
   }
   

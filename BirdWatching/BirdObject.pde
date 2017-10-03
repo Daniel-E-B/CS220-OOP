@@ -1,4 +1,6 @@
 class BirdObject{
+  PImage img;
+  float xSpeed;
   float x;
   float y;
   color fillColor;
