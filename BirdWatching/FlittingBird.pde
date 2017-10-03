@@ -1,6 +1,4 @@
-class FlittingBird implements Creature{
-  float x;
-  float y;
+class FlittingBird extends BirdObject implements Creature{
   float xSpeed;
   float minXSpeed = 2.0;
   float maxXSpeed = 5.0;
@@ -8,14 +6,12 @@ class FlittingBird implements Creature{
   float minYSpeed = -1.0;
   float maxYSpeed = 1.0;
   float size = 15.0;
-  color fillColor;
 
   FlittingBird() {
-    this.x = random(0, width);
+    super();
     this.y = random(0, height);
     this.xSpeed = random(minXSpeed, maxXSpeed);
     this.ySpeed = random(minYSpeed, maxYSpeed);
-    this.fillColor = color(random(0,255), random(0,255), random(0,255));
   }
   
   void display() {

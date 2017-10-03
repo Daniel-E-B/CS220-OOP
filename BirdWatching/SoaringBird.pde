@@ -1,17 +1,13 @@
-class SoaringBird implements Creature{
-  float x;
-  float y;
+class SoaringBird extends BirdObject implements Creature{
   float xSpeed;
   float minXSpeed = 1.0;
   float maxXSpeed = 3.0;
   float size = 30.0;
-  color fillColor;
 
   SoaringBird() {
-    this.x = random(0, width);
+    super();
     this.y = random(0, height);
     this.xSpeed = random(this.minXSpeed,this.maxXSpeed);
-    this.fillColor = color(random(0,255), random(0,255), random(0,255));
   }
   
   void display() {

@@ -1,17 +1,13 @@
-class FallingFeather implements Creature{
-  float x;
-  float y;
+class FallingFeather extends BirdObject implements Creature{
   float xSpeed;
   float ySpeed;
   float size = 5.0;
-  color fillColor;
 
   FallingFeather() {
-    this.x = random(0, width);
+    super();
     this.y = random(-height, 0);
     this.xSpeed = random(-1,1);
     this.ySpeed = random(0.5, 1.5);
-    this.fillColor = color(random(0,255), random(0,255), random(0,255));
   }
   
   void display() {
