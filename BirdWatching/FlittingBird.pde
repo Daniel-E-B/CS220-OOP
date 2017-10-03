@@ -4,7 +4,7 @@ class FlittingBird extends BirdObject implements Creature{
   float ySpeed;
   float minYSpeed = -1.0;
   float maxYSpeed = 1.0;
-  float size = 15.0;
+  float size = 11.0;
 
   FlittingBird() {
     super();

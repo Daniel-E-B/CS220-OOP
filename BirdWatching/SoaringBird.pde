@@ -1,7 +1,7 @@
 class SoaringBird extends BirdObject implements Creature{
   float minXSpeed = 1.0;
   float maxXSpeed = 3.0;
-  float size = 15.0;
+  float size = 5.0;
 
   SoaringBird() {
     super();
