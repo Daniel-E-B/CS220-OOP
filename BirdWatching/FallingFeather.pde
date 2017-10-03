@@ -1,9 +1,10 @@
 class FallingFeather extends BirdObject implements Creature{
   float ySpeed;
-  float size = 5.0;
+  float size = 6.0;
 
   FallingFeather() {
     super();
+    img=loadImage("feather.png");
     this.y = random(-height, 0);
     this.xSpeed = random(-1,1);
     this.ySpeed = random(0.5, 1.5);
@@ -12,7 +13,7 @@ class FallingFeather extends BirdObject implements Creature{
   void display() {
     fill(this.fillColor);
     imageMode(CORNER);
-    rect(this.x, this.y, this.size*2, this.size);
+    image(this.img, this.x, this.y, width/this.size, height/this.size);
   }
   
   void move() {

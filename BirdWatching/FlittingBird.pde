@@ -8,6 +8,7 @@ class FlittingBird extends BirdObject implements Creature{
 
   FlittingBird() {
     super();
+    img=loadImage("flittingBird.png");
     this.y = random(0, height);
     this.xSpeed = random(minXSpeed, maxXSpeed);
     this.ySpeed = random(minYSpeed, maxYSpeed);
@@ -16,7 +17,8 @@ class FlittingBird extends BirdObject implements Creature{
   void display() {
     fill(this.fillColor);
     imageMode(CENTER);
-    ellipse(this.x, this.y, this.size*2, this.size);
+    image(this.img, this.x, this.y, width/this.size, height/this.size);
+    //ellipse(this.x, this.y, this.size*2, this.size);
   }
   
   void move() {
