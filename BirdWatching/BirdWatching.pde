@@ -1,3 +1,4 @@
+//All images from openclipart.org. October 2, 2017
 ArrayList<Creature> creatures = new ArrayList<Creature>();
 
 void setup() {

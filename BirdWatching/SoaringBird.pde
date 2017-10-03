@@ -14,7 +14,6 @@ class SoaringBird extends BirdObject implements Creature{
     fill(this.fillColor);
     imageMode(CENTER);
     image(this.img, this.x, this.y, width/this.size, height/this.size);
-    //ellipse(this.x, this.y, this.size*2, this.size);
   }
   
   void move() {
