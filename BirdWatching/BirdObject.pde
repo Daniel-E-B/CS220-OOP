@@ -1,4 +1,4 @@
-class BirdObject{
+abstract class BirdObject{
   PImage img;
   float xSpeed;
   float x;
