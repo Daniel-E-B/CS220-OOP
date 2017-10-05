@@ -59,21 +59,7 @@ void setup() {
 void draw() {
     background(255, 255, 255);
     
-    c=s.available();
-    if(c!=null){
-      //receive and parse packet
-      input = c.readString();//stick this all in a class
-      input=input.substring(0, input.indexOf("\n"));//may not be needed. Cuts of the input up to the newline
-      data=float(split(input, ' '));
-      //check that it is a full packet
-      try{float temp = data[6];} catch(ArrayIndexOutOfBoundsException e){
-      println("array index out of bounds, dropped packet", e);
-      }//bad form. If I change the size of data, I need to change this.
-      RemotePlayer newP=new RemotePlayer(data[0],data[1],data[2],data[3],data[4],data[5],data[6]);
-      for(int i=0; i<remotePlayers.size(); ++i){//check if the client is new
-        if(
-      }
-    }
+
     
     Iterator<Player> gameTick=Players.iterator();//go through players
         while(gameTick.hasNext()){

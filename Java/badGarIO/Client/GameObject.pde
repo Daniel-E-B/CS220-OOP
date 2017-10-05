@@ -1,4 +1,4 @@
-class GameObject{
+abstract class GameObject{
     float x;
     float y;
     color fillColor;

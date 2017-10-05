@@ -1,4 +1,4 @@
-class RemotePlayer{
+class rPlayer{
   float playerID;
   float radius;
   float x;
@@ -6,8 +6,9 @@ class RemotePlayer{
   float r;
   float g;
   float b;
+  float alive;
   
-  RemotePlayer(float id, float rad, float x, float y, float r, float g, float b){
+  rPlayer(float id, float rad, float x, float y, float r, float g, float b, float alive){
     this.playerID=id;
     this.radius=rad;
     this.x=x;
@@ -15,5 +16,6 @@ class RemotePlayer{
     this.r=r;
     this.g=g;
     this.b=b;
+    this.alive=alive;
   }
 }
