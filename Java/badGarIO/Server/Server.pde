@@ -64,7 +64,7 @@ void draw() {
       boolean inSystem=false;
       for(int i=0; i<rPlayers.size(); ++i){
         if(rPlayers.get(i).playerID==data[0]){
-          rPlayers.get(i)=new rPlayer(data[0],data[1],data[2],data[3],data[4],data[5],data[6],data[7]);
+          rPlayers.set(i, new rPlayer(data[0],data[1],data[2],data[3],data[4],data[5],data[6],data[7]));
           inSystem=true;
         }
     }if(inSystem==false){//if the plater is not in the system, add them
