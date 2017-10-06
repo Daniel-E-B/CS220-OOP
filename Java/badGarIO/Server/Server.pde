@@ -98,6 +98,7 @@ void draw() {
   foodOutput="";
   //send the number of foods (for dropped packet checking)
   foodOutput+=String.valueOf(Foods.size());
+  foodOutput+=" ";
   for(int i=0; i<Foods.size(); ++i){
     foodOutput+=(Foods.get(i).x);
     foodOutput+=(",");//separate coordinates by ","
@@ -113,7 +114,22 @@ void draw() {
   for(int i =0; i<rPlayers.size(); ++i){
     //parse out and separate by "," for same player parameters
     //spearate by " " for separation between players
-    
+    playerOutput+=(rPlayers.get(i).playerID);
+    playerOutput+=",";
+    playerOutput+=(rPlayers.get(i).radius);
+    playerOutput+=",";
+    playerOutput+=(rPlayers.get(i).x);
+    playerOutput+=",";
+    playerOutput+=(rPlayers.get(i).y);
+    playerOutput+=",";
+    playerOutput+=(rPlayers.get(i).r);
+    playerOutput+=",";
+    playerOutput+=(rPlayers.get(i).g);
+    playerOutput+=",";
+    playerOutput+=(rPlayers.get(i).b);
+    playerOutput+=",";
+    playerOutput+=(rPlayers.get(i).alive);
+    playerOutput+=" ";    
   }
 }
 
