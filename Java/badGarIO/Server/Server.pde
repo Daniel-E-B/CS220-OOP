@@ -6,17 +6,19 @@ Server gameServer;
 Client c;
 float data[];//playerID, size, x, y, r, g, b, alive/dead
 String input;
+String foodOutput="";
+String playerOutput="";
 //The local player is always in index 0
 
 void initFood(int numFoods){
   for(int i=0; i<numFoods; ++i){
-    Foods.add(new Food(random(0,width),random(0,height)));
+    Foods.add(new Food(random(0,width),random(0,height), random(height/100)));
   }
 }
 
 void addFood(){
   if(foodInterval>=120){
-    Foods.add(new Food(random(0, width), random(0, height)));
+    Foods.add(new Food(random(0, width), random(0, height), random(height/100)));
     foodInterval=0;
   }
 }
@@ -73,8 +75,8 @@ void draw() {
     }
      /*
      check if people ate each other
+     check if people ate food
      update food array
-     transmit food array
      transmit players to other players
      */
             Iterator<Food> foodTick=Foods.iterator();
@@ -90,6 +92,29 @@ void draw() {
      addFood();
     }
   ++foodInterval;
+  //write the food array out to the clients
+  //parse the food array into a string
+  //for every food, the constructor only needs an x and a y
+  foodOutput="";
+  //send the number of foods (for dropped packet checking)
+  foodOutput+=String.valueOf(Foods.size());
+  for(int i=0; i<Foods.size(); ++i){
+    foodOutput+=(Foods.get(i).x);
+    foodOutput+=(",");//separate coordinates by ","
+    foodOutput+=(Foods.get(i).y);
+    foodOutput+=(" ");//terminate with a " "
+  }
+  gameServer.write(foodOutput);
+  //write the players out to the clients (including the client that is came from)
+  //the clients should ignore the x and y that they get back from the server, but use all of the other stuff
+  playerOutput="";
+  //send the number of players (for dropped packet checking)
+  playerOutput+=String.valueOf(rPlayers.size());
+  for(int i =0; i<rPlayers.size(); ++i){
+    //parse out and separate by "," for same player parameters
+    //spearate by " " for separation between players
+    
+  }
 }
 
 /* Processing will call this when a key is pressed. */
