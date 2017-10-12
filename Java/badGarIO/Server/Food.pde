@@ -1,7 +1,7 @@
 import java.util.Iterator;
 //ad pokey foods
 class Food extends GameObject{
-    
+    float alive=1;
     /*
       Create a new circle at the given x,y point with a
       random speed, color, and size.'''

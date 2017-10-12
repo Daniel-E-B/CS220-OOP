@@ -52,6 +52,28 @@ void setup() {
 void draw() {
     background(255, 255, 255);
     
+     for(int i=0; i<rPlayers.size();++i){
+       //check if players ate each other
+       for(int p=i+1; p<rPlayers.size(); ++p){
+         
+       }
+       //check if players ate food
+       for(int f=0; f<Foods.size(); ++f){
+         
+       }
+     }
+     //update food array
+     Iterator<Food> fIterator=Foods.iterator();
+     while(fIterator.hasNext()){
+       Food element=fIterator.next();
+       
+       if(element.alive==0){
+         fIterator.remove();
+       }
+     }
+      
+     addFood();
+    
     c=gameServer.available();
     if(c!=null){
       //receive player from client
@@ -88,6 +110,8 @@ void draw() {
     foodOutput+=(Foods.get(i).x);
     foodOutput+=(",");//separate coordinates by ","
     foodOutput+=(Foods.get(i).y);
+    foodOutput+=(",");
+    foodOutput+=(Foods.get(i).alive);
     foodOutput+=(" ");//terminate with a " "
   }
   gameServer.write(foodOutput);
