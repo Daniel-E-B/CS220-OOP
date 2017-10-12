@@ -55,11 +55,13 @@ void draw() {
      for(int i=0; i<rPlayers.size();++i){
        //check if players ate each other
        for(int p=i+1; p<rPlayers.size(); ++p){
-         
+         //eat people
+         rPlayers.get(i).r+=rPlayers.get(i).eatPlayer(rPlayers.get(i),rPlayers)/PI;
        }
        //check if players ate food
        for(int f=0; f<Foods.size(); ++f){
-         
+        //eat food
+        rPlayers.get(i).r+=rPlayers.get(i).eatFood(rPlayers.get(i),Foods)/PI;
        }
      }
      //update food array
@@ -71,8 +73,17 @@ void draw() {
          fIterator.remove();
        }
      }
-      
      addFood();
+     //update player array
+     //ON THE CLIENT SIDE, CHECK IF THE PLAYER IS DEAD, AND IF IT IS, DISCONNECT
+     Iterator<rPlayer> pIterator=rPlayers.iterator();
+     while(pIterator.hasNext()){
+       rPlayer element=pIterator.next();
+       
+       if(element.alive==0){
+         pIterator.remove();
+       }
+     }
     
     c=gameServer.available();
     if(c!=null){

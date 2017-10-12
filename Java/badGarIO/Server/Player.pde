@@ -43,8 +43,9 @@ class Player extends GameObject{
         //move the shapes
           moveToMouse();
           this.collision.collide(this);//check for collisions with wall
-          this.radius+=eatCheck.eatPlayer(this, playerObjects)/PI;//dumb way of growing
-          this.radius+=eatCheck.eatFood(this,  foodObjects)/PI; 
+          //DEPRECATED
+          //this.radius+=eatCheck.eatPlayer(this, playerObjects)/PI;//dumb way of growing
+          //this.radius+=eatCheck.eatFood(this,  foodObjects)/PI; 
           ++framesPassed;
           loseHealth(60);
     }
