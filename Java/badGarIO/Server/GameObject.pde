@@ -5,7 +5,6 @@ class GameObject{
     float radius;
     float speed=0;
     boolean die=false;
-    Collidable collision = new Collidable(true);
     Eatable eatCheck = new Eatable();
     
     /*
