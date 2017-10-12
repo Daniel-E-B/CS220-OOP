@@ -8,10 +8,6 @@ abstract class GameObject{
     Collidable collision = new Collidable(true);
     Eatable eatCheck = new Eatable();
     
-    /*
-      Create a new circle at the given x,y point with a
-      random speed, color, and size.'''
-     */
     public GameObject (float x, float y) {
 
         this.x = x; 
@@ -31,9 +27,9 @@ abstract class GameObject{
       }
   
     
-    /* Draw self on the canvas. */
     public void display() {
         fill(this.fillColor);
-        ellipse(this.x, this.y, this.radius*2, this.radius*2);
+        ellipse(this.x, this.y, this.radius*2, this.
+    /* Draw self on the canvas. */radius*2);
     }
 }

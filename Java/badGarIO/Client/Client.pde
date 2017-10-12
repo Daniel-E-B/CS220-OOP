@@ -1,10 +1,9 @@
 import processing.net.*;
 ArrayList<Food> Foods = new ArrayList<Food>();//this doesn't control food, but needs to draw it
 ArrayList<rPlayer> rPlayers = new ArrayList<rPlayer>();
-Player localPlayer = new Player(0,0);
-Server s=new Server(this, 24274);
-Client c;
-float data[];//playerID, size, x, y, r, g, b, alive
+Player localPlayer;
+Client pClient;
+//playerID, size, x, y, r, g, b, alive
 String input;
 
 
@@ -19,9 +18,11 @@ void setup() {
   noStroke();
   textMode(CENTER);
   textAlign(CENTER);
+  pClient=new Client(this, "10.1.129.171",24274);//this should not be an error!
 }
 
 void draw() {
     background(255, 255, 255);
-
+    if (pClient.available() > 0) { 
+  } 
 }
