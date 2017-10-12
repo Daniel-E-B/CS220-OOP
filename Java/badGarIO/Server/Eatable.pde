@@ -1,4 +1,5 @@
 class Eatable{//make one function to check for both
+//adapt to work with rPlayer for the server class
   float eatPlayer(Player c, ArrayList<Player> playerObjects){
           for(int i=0; i<playerObjects.size(); ++i){
             if(playerObjects.get(i)!=c){

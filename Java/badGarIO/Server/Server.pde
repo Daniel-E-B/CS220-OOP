@@ -73,29 +73,14 @@ void draw() {
       rPlayers.add(new rPlayer(data[0],data[1],data[2],data[3],data[4],data[5],data[6],data[7]));
       inSystem=true;
     }
-     /*
-     check if people ate each other
-     check if people ate food
-     update food array
-     transmit players to other players
-     */
-            Iterator<Food> foodTick=Foods.iterator();
-            while(foodTick.hasNext()){
-            Food fElement = foodTick.next();
-            fElement.display();
-              if(fElement.die){
-                foodTick.remove();
-              }
-            }
-          
-         
-     addFood();
     }
   ++foodInterval;
   //write the food array out to the clients
   //parse the food array into a string
   //for every food, the constructor only needs an x and a y
   foodOutput="";
+  //the first part of the array should be FOOD
+  foodOutput+="FOOD ";
   //send the number of foods (for dropped packet checking)
   foodOutput+=String.valueOf(Foods.size());
   foodOutput+=" ";
@@ -109,6 +94,8 @@ void draw() {
   //write the players out to the clients (including the client that is came from)
   //the clients should ignore the x and y that they get back from the server, but use all of the other stuff
   playerOutput="";
+  //the first part of the array should be PLAYERS
+  playerOutput+="PLAYERS ";
   //send the number of players (for dropped packet checking)
   playerOutput+=String.valueOf(rPlayers.size());
   for(int i =0; i<rPlayers.size(); ++i){
@@ -129,7 +116,7 @@ void draw() {
     playerOutput+=(rPlayers.get(i).b);
     playerOutput+=",";
     playerOutput+=(rPlayers.get(i).alive);
-    playerOutput+=" ";    
+    playerOutput+=" ";
   }
 }
 
