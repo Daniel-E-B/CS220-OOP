@@ -36,12 +36,13 @@ void reset() {
 */
 void setup() {
   size(1024, 768);
-  gameServer = new Server(this, 24274);
+  gameServer = new Server(this, 24342);
   frameRate(60);
   initFood(height/25);
   noStroke();
   textMode(CENTER);
   textAlign(CENTER);
+  initFood(500);
 }
 
 /* 
@@ -89,7 +90,8 @@ void draw() {
     if(c!=null){
       //receive player from client
       input = c.readString();//stick this all in a class
-      input = input.substring(0, input.indexOf("\n"));//stop reading at newline
+      try{input=input.substring(0,input.indexOf("\n"));}//only read up to newline}
+      catch(StringIndexOutOfBoundsException e){println("Dropped input");}
       data = float(split(input, ' '));  // Split values into an array
       //check that it is a full packet
       try{ float temp = data[7]; } catch(ArrayIndexOutOfBoundsException e){
@@ -126,6 +128,7 @@ void draw() {
     foodOutput+=(" ");//terminate with a " "
   }
   gameServer.write(foodOutput);
+  println(Foods);
   //write the players out to the clients (including the client that is came from)
   //the clients should ignore the x and y that they get back from the server, but use all of the other stuff
   playerOutput="";
@@ -153,6 +156,7 @@ void draw() {
     playerOutput+=(rPlayers.get(i).alive);
     playerOutput+=" ";
   }
+  gameServer.write(playerOutput);
 }
 
 /* Processing will call this when a key is pressed. */
