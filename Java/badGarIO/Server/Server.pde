@@ -1,3 +1,5 @@
+//TODO: Add collision code to the server
+
 import processing.net.*;
 ArrayList<Food> Foods = new ArrayList<Food>();
 ArrayList<rPlayer> rPlayers = new ArrayList<rPlayer>();//r stand for remote
