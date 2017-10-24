@@ -93,6 +93,7 @@ void draw() {
       try{input=input.substring(0,input.indexOf("\n"));}//only read up to newline}
       catch(StringIndexOutOfBoundsException e){println("Dropped input");}
       data = float(split(input, ' '));  // Split values into an array
+      //the data array is twice as long as its supposed to be!! (0-14 indexes)
       //check that it is a full packet
       try{ float temp = data[7]; } catch(ArrayIndexOutOfBoundsException e){
       println("array index out of bounds, dropped packet", e);
@@ -128,7 +129,6 @@ void draw() {
     foodOutput+=(" ");//terminate with a " "
   }
   gameServer.write(foodOutput);
-  println(Foods);
   //write the players out to the clients (including the client that is came from)
   //the clients should ignore the x and y that they get back from the server, but use all of the other stuff
   playerOutput="";
