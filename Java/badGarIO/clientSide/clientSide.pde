@@ -63,7 +63,7 @@ void draw() {
            rPlayers.add(new rPlayer(s.nextFloat(), s.nextFloat(), s.nextFloat(), s.nextFloat()
                         , s.nextFloat(), s.nextFloat(), s.nextFloat(), s.nextFloat()));            
           }
-        }
+         }
         catch(ArrayIndexOutOfBoundsException e){
           println("Dropped packet PLAYERS");
         }

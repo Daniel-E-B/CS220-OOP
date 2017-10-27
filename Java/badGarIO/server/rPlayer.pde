@@ -8,9 +8,9 @@ class rPlayer extends Eatable{
   float b;
   float alive;
   
-  rPlayer(float id, float rad, float x, float y, float r, float g, float b, float alive){
+  rPlayer(float id, float radius, float x, float y, float r, float g, float b, float alive){
     this.playerID=id;
-    this.radius=rad;
+    this.radius=radius;
     this.x=x;
     this.y=y;
     this.r=r;

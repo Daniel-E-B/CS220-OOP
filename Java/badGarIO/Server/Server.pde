@@ -66,7 +66,7 @@ void draw() {
         //eat food
         rPlayers.get(i).r+=rPlayers.get(i).eatFood(rPlayers.get(i),Foods)/PI;
        }
-     }
+    }
      //update food array
      Iterator<Food> fIterator=Foods.iterator();
      while(fIterator.hasNext()){
@@ -98,7 +98,7 @@ void draw() {
       //the data array is twice as long as its supposed to be!! (0-14 indexes)
       //check that it is a full packet
       try{ float temp = data[7]; } catch(ArrayIndexOutOfBoundsException e){
-      println("array index out of bounds, dropped packet", e);
+        println("array index out of bounds, dropped packet", e);
       }/*bad form. If I change the size of data, I need to change this.
       if the player is already in the arraylist, update them. */
       boolean inSystem=false;
@@ -107,11 +107,12 @@ void draw() {
           rPlayers.set(i, new rPlayer(data[0],data[1],data[2],data[3],data[4],data[5],data[6],data[7]));
           inSystem=true;
         }
-    }if(inSystem==false){//if the plater is not in the system, add them
+    }
+    if(inSystem==false){//if the plater is not in the system, add them
       rPlayers.add(new rPlayer(data[0],data[1],data[2],data[3],data[4],data[5],data[6],data[7]));
       inSystem=true;
     }
-    }
+   }
   ++foodInterval;
   //write the food array out to the clients
   //parse the food array into a string
