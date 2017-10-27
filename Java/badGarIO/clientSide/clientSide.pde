@@ -1,6 +1,6 @@
 import processing.net.*;
 import java.util.Scanner;
-ArrayList<Food> Foods = new ArrayList<Food>();//this doesn't control food, but needs to draw it
+ArrayList<Food> foods = new ArrayList<Food>();//this doesn't control food, but needs to draw it
 ArrayList<rPlayer> rPlayers = new ArrayList<rPlayer>();
 Player localPlayer;
 Client c;
@@ -42,9 +42,9 @@ void draw() {
           s=new Scanner(data[i]).useDelimiter(",");
           //first and 0th index used by other stuff. Start at 2nd index
           //Each string has x,y,alive terminated by a space
-           Foods.clear();
-           Foods.add(new Food(s.nextFloat(), s.nextFloat(), s.nextFloat()));
-           println(Foods.size());
+           foods.clear();
+           foods.add(new Food(s.nextFloat(), s.nextFloat(), s.nextFloat()));
+           println(foods.size());
           }
         }
         catch(ArrayIndexOutOfBoundsException e){
@@ -69,10 +69,10 @@ void draw() {
         }
       }
   } 
-  println(Foods.size());
+  println(foods.size());
   //display everything
-  for(int i=0; i<Foods.size(); ++i){
-    Foods.get(i).display();
+  for(int i=0; i<foods.size(); ++i){
+    foods.get(i).display();
   }
   //update local player
 }

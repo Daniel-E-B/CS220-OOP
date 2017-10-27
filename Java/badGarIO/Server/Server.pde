@@ -1,7 +1,7 @@
 //TODO: Add collision code to the server
 
 import processing.net.*;
-ArrayList<Food> Foods = new ArrayList<Food>();
+ArrayList<Food> foods = new ArrayList<Food>();
 ArrayList<rPlayer> rPlayers = new ArrayList<rPlayer>();//r stand for remote
 int foodInterval=120;//every 120 frames, add a food;
 Server gameServer;
@@ -12,15 +12,15 @@ String foodOutput="";
 String playerOutput="";
 //The local player is always in index 0
 
-void initFood(int numFoods){
-  for(int i=0; i<numFoods; ++i){
-    Foods.add(new Food(random(0,width),random(0,height), random(height/100)));
+void initFood(int numfoods){
+  for(int i=0; i<numfoods; ++i){
+    foods.add(new Food(random(0,width),random(0,height), random(height/100)));
   }
 }
 
 void addFood(){
   if(foodInterval>=120){
-    Foods.add(new Food(random(0, width), random(0, height), random(height/100)));
+    foods.add(new Food(random(0, width), random(0, height), random(height/100)));
     foodInterval=0;
   }
 }
@@ -28,7 +28,7 @@ void addFood(){
 /* Clear all game objects. */
 void reset() {
     rPlayers = new ArrayList<rPlayer>();
-    Foods = new ArrayList<Food>();
+    foods = new ArrayList<Food>();
     initFood(height/25);
 }
 
@@ -62,13 +62,13 @@ void draw() {
          rPlayers.get(i).r+=rPlayers.get(i).eatPlayer(rPlayers.get(i),rPlayers)/PI;
        }
        //check if players ate food
-       for(int f=0; f<Foods.size(); ++f){
+       for(int f=0; f<foods.size(); ++f){
         //eat food
-        rPlayers.get(i).r+=rPlayers.get(i).eatFood(rPlayers.get(i),Foods)/PI;
+        rPlayers.get(i).r+=rPlayers.get(i).eatFood(rPlayers.get(i),foods)/PI;
        }
     }
      //update food array
-     Iterator<Food> fIterator=Foods.iterator();
+     Iterator<Food> fIterator=foods.iterator();
      while(fIterator.hasNext()){
        Food element=fIterator.next();
        
@@ -121,14 +121,14 @@ void draw() {
   //the first part of the array should be FOOD
   foodOutput+="FOOD ";
   //send the number of foods (for dropped packet checking)
-  foodOutput+=String.valueOf(Foods.size());
+  foodOutput+=String.valueOf(foods.size());
   foodOutput+=" ";
-  for(int i=0; i<Foods.size(); ++i){
-    foodOutput+=(Foods.get(i).x);
+  for(int i=0; i<foods.size(); ++i){
+    foodOutput+=(foods.get(i).x);
     foodOutput+=(",");//separate coordinates by ","
-    foodOutput+=(Foods.get(i).y);
+    foodOutput+=(foods.get(i).y);
     foodOutput+=(",");
-    foodOutput+=(Foods.get(i).alive);
+    foodOutput+=(foods.get(i).alive);
     foodOutput+=(" ");//terminate with a " "
   }
   gameServer.write(foodOutput);
