@@ -16,7 +16,7 @@ class rPlayer extends Eatable{
     this.r=r;
     this.g=g;
     this.b=b;
-    this.alive=alive;
+    this.alive=1;
   }
   
   float distance(float x1, float y1, float x2, float y2){

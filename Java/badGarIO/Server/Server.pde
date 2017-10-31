@@ -39,7 +39,7 @@ void reset() {
 void setup() {
   size(1024, 768);
   gameServer = new Server(this, 24342);
-  frameRate(60);
+  frameRate(5);
   initFood(height/25);
   noStroke();
   textMode(CENTER);
@@ -91,9 +91,7 @@ void draw() {
     c=gameServer.available();
     if(c!=null){
       //receive player from client
-      input = c.readString();//stick this all in a class
-      try{input=input.substring(0,input.indexOf("\n"));}//only read up to newline}
-      catch(StringIndexOutOfBoundsException e){println("Dropped input");}
+      input = c.readString();//stick this all in a class    
       data = float(split(input, ' '));  // Split values into an array
       //the data array is twice as long as its supposed to be!! (0-14 indexes)
       //check that it is a full packet
@@ -132,6 +130,7 @@ void draw() {
     foodOutput+=(" ");//terminate with a " "
   }
   gameServer.write(foodOutput);
+  gameServer.write("\n");//separate the foodoutput and the player output
   //write the players out to the clients (including the client that is came from)
   //the clients should ignore the x and y that they get back from the server, but use all of the other stuff
   playerOutput="";

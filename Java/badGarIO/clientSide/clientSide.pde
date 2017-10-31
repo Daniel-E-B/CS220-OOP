@@ -9,14 +9,15 @@ int numPlayers,numFoods;
 //playerID, size, x, y, r, g, b, alive
 String input;
 String data[];
+String fData[]; 
+String pData[];
 
 void setup() {
   size(1024, 768);
   localPlayer=(new Player(random(0,width), random(0,height)));
   frameRate(60);
   noStroke();
-  c = new Client(this, "10.1.130.189", 24342);//this should not be an error!
-  textMode(CENTER);
+  c = new Client(this, "10.1.129.113", 24342);//this should not be an error!
   textAlign(CENTER);
 }
 
@@ -29,34 +30,47 @@ void draw() {
                     localPlayer.g+" "+localPlayer.b+" "+localPlayer.alive);
       //read in data from server
       input=c.readString();
-    //  try{input=input.substring(0,input.indexOf("\n"));}//only read up to newline}
-     // catch(StringIndexOutOfBoundsException e){println("Dropped input");}
-      data=(split(input, ' '));//split values into array
-      
+      //println(input);
+      data=(split(input, "\n"));//split values into player stuff and food stuff
+      try{
+      fData=split(data[0], " ");
+      }catch (ArrayIndexOutOfBoundsException e){
+        println("Couldn't split food",e);
+      }
+      try{
+      pData=split(data[0], " ");
+      }catch (ArrayIndexOutOfBoundsException e){
+        println("Couldn't split players",e);
+      }
        //s = new Scanner(input).useDelimiter(",");//delimiter separates by ,
       //receive the food from the server
-      if(data[0]=="FOOD"){
-        numFoods=data.length;//may or may not be good
+     try{
+      if(fData[0]=="FOOD"){
+        println(fData.length);
+        numFoods=fData.length;//may or may not be good
         try{
           for(int i=2;i<numFoods;++i){
-          s=new Scanner(data[i]).useDelimiter(",");
+          s=new Scanner(fData[i]).useDelimiter(",");
           //first and 0th index used by other stuff. Start at 2nd index
           //Each string has x,y,alive terminated by a space
            foods.clear();
            foods.add(new Food(s.nextFloat(), s.nextFloat(), s.nextFloat()));
-           println(foods.size());
           }
         }
-        catch(ArrayIndexOutOfBoundsException e){
+        catch(NullPointerException e){
           println("Dropped packet FOOD");
         }
       }
+     }catch(ArrayIndexOutOfBoundsException e){
+       println("Couldn't get fData",e);
+     }
       //receive the players from the server
-      else if(data[0]=="PLAYERS"){
-        numPlayers=data.length;//may or may not be good
+     try{
+      if(pData[0]=="PLAYERS"){
+        numPlayers=pData.length;//may or may not be good
         try{
           for(int i=0; i<numPlayers; ++i){
-          s=new Scanner(data[i]).useDelimiter(",");
+          s=new Scanner(pData[i]).useDelimiter(",");
           //first and 0th index used by other stuff. Start at 2nd index
           //Each string has x,y,alive terminated by a space
            rPlayers.clear();
@@ -68,8 +82,10 @@ void draw() {
           println("Dropped packet PLAYERS");
         }
       }
+     }catch(NullPointerException e){
+       println("Could not get pData",e);
+     }
   } 
-  println(foods.size());
   //display everything
   for(int i=0; i<foods.size(); ++i){
     foods.get(i).display();

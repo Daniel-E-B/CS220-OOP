@@ -1,6 +1,6 @@
 
 import java.util.Iterator;
-//ad pokey foods
+//add pokey foods
 class Food extends GameObject{
     
 
