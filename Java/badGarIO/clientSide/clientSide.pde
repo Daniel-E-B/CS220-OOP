@@ -17,7 +17,7 @@ void setup() {
   localPlayer=(new Player(random(0,width), random(0,height)));
   frameRate(60);
   noStroke();
-  c = new Client(this, "10.1.129.113", 24342);//this should not be an error!
+  c = new Client(this, "10.1.129.113", 24342);
   textAlign(CENTER);
 }
 
@@ -30,15 +30,15 @@ void draw() {
                     localPlayer.g+" "+localPlayer.b+" "+localPlayer.alive);
       //read in data from server
       input=c.readString();
-      //println(input);
-      data=(split(input, "\n"));//split values into player stuff and food stuff
+      data=(split(input, ";"));//split values into player stuff and food stuff
       try{
-      fData=split(data[0], " ");
+        fData=split(data[0], " ");
       }catch (ArrayIndexOutOfBoundsException e){
         println("Couldn't split food",e);
       }
       try{
-      pData=split(data[0], " ");
+        pData=split(data[1], " ");
+        println(pData.length);
       }catch (ArrayIndexOutOfBoundsException e){
         println("Couldn't split players",e);
       }
@@ -46,8 +46,8 @@ void draw() {
       //receive the food from the server
      try{
       if(fData[0]=="FOOD"){
+        numFoods=fData.length;//may or may not work
         println(fData.length);
-        numFoods=fData.length;//may or may not be good
         try{
           for(int i=2;i<numFoods;++i){
           s=new Scanner(fData[i]).useDelimiter(",");
@@ -85,9 +85,10 @@ void draw() {
      }catch(NullPointerException e){
        println("Could not get pData",e);
      }
-  } 
+  }
   //display everything
   for(int i=0; i<foods.size(); ++i){
+    //foods is empty!!
     foods.get(i).display();
   }
   //update local player

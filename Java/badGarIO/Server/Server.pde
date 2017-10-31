@@ -39,7 +39,7 @@ void reset() {
 void setup() {
   size(1024, 768);
   gameServer = new Server(this, 24342);
-  frameRate(5);
+  frameRate(60);
   initFood(height/25);
   noStroke();
   textMode(CENTER);
@@ -130,7 +130,7 @@ void draw() {
     foodOutput+=(" ");//terminate with a " "
   }
   gameServer.write(foodOutput);
-  gameServer.write("\n");//separate the foodoutput and the player output
+  gameServer.write(";");//separate the foodoutput and the player output
   //write the players out to the clients (including the client that is came from)
   //the clients should ignore the x and y that they get back from the server, but use all of the other stuff
   playerOutput="";
@@ -159,6 +159,7 @@ void draw() {
     playerOutput+=" ";
   }
   gameServer.write(playerOutput);
+  println(playerOutput.length());
 }
 
 /* Processing will call this when a key is pressed. */
