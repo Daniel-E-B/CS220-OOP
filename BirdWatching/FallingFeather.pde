@@ -1,9 +1,9 @@
 class FallingFeather extends BirdObject{
   float ySpeed;
-  float size = 6.0;
 
   FallingFeather() {
     super();
+    this.size=6;
     img=loadImage("feather.png");
     this.y = random(-height, 0);
     this.xSpeed = random(-1,1);
