@@ -4,10 +4,10 @@ class FlittingBird extends BirdObject{
   float ySpeed;
   float minYSpeed = -1.0;
   float maxYSpeed = 1.0;
-  float size = 11.0;
 
   FlittingBird() {
     super();
+    this.size=11;
     this.img=loadImage("flittingBird.png");
     this.y = random(0, height);
     this.xSpeed = random(minXSpeed, maxXSpeed);
