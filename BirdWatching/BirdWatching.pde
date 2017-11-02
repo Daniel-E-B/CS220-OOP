@@ -16,8 +16,8 @@ void setup() {
 void draw() {
   background(173,216,230);
   
-  for(int i=0; i<creatures.size(); ++i){
-    creatures.get(i).move();
-    creatures.get(i).display();
+  for(Creature creature: creatures){
+    creature.move();
+    creature.display();
   }
 }
