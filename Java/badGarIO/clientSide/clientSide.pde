@@ -17,7 +17,7 @@ void setup() {
   localPlayer=(new Player(random(0,width), random(0,height)));
   frameRate(60);
   noStroke();
-  c = new Client(this, "10.1.129.113", 24342);
+  c = new Client(this, "10.1.130.19", 24342);
   textAlign(CENTER);
 }
 
@@ -47,7 +47,7 @@ void draw() {
      try{
       if(fData[0]=="FOOD"){
         numFoods=fData.length;//may or may not work
-        println(fData.length);
+      println(fData.length);
         try{
           for(int i=2;i<numFoods;++i){
           s=new Scanner(fData[i]).useDelimiter(",");
@@ -96,5 +96,4 @@ void draw() {
 
 void addPlayer(int x, int y) {
     localPlayer=(new Player(x, y));
-    localPlayer.playerID=random(0,100000);
 }

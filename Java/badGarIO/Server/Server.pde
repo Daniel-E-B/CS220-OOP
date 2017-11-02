@@ -107,7 +107,9 @@ void draw() {
         }
     }
     if(inSystem==false){//if the plater is not in the system, add them
-      rPlayers.add(new rPlayer(data[0],data[1],data[2],data[3],data[4],data[5],data[6],data[7]));
+      try{
+        rPlayers.add(new rPlayer(data[0],data[1],data[2],data[3],data[4],data[5],data[6],data[7]));
+      }catch(ArrayIndexOutOfBoundsException e){println("Couldn't create rPlayer instance",e);}
       inSystem=true;
     }
    }
@@ -121,12 +123,12 @@ void draw() {
   //send the number of foods (for dropped packet checking)
   foodOutput+=String.valueOf(foods.size());
   foodOutput+=" ";
-  for(int i=0; i<foods.size(); ++i){
-    foodOutput+=(foods.get(i).x);
+  for(Food f : foods){
+    foodOutput+=(f.x);
     foodOutput+=(",");//separate coordinates by ","
-    foodOutput+=(foods.get(i).y);
+    foodOutput+=(f.y);
     foodOutput+=(",");
-    foodOutput+=(foods.get(i).alive);
+    foodOutput+=(f.alive);
     foodOutput+=(" ");//terminate with a " "
   }
   gameServer.write(foodOutput);
@@ -138,28 +140,28 @@ void draw() {
   playerOutput+="PLAYERS ";
   //send the number of players (for dropped packet checking)
   playerOutput+=String.valueOf(rPlayers.size());
-  for(int i =0; i<rPlayers.size(); ++i){
+  for(rPlayer p : rPlayers){
     //parse out and separate by "," for same player parameters
     //spearate by " " for separation between players
-    playerOutput+=(rPlayers.get(i).playerID);
+    playerOutput+=(p.playerID);
+    println(p.playerID);
     playerOutput+=",";
-    playerOutput+=(rPlayers.get(i).radius);
+    playerOutput+=(p.radius);
     playerOutput+=",";
-    playerOutput+=(rPlayers.get(i).x);
+    playerOutput+=(p.x);
     playerOutput+=",";
-    playerOutput+=(rPlayers.get(i).y);
+    playerOutput+=(p.y);
     playerOutput+=",";
-    playerOutput+=(rPlayers.get(i).r);
+    playerOutput+=(p.r);
     playerOutput+=",";
-    playerOutput+=(rPlayers.get(i).g);
+    playerOutput+=(p.g);
     playerOutput+=",";
-    playerOutput+=(rPlayers.get(i).b);
+    playerOutput+=(p.b);
     playerOutput+=",";
-    playerOutput+=(rPlayers.get(i).alive);
+    playerOutput+=(p.alive);
     playerOutput+=" ";
   }
   gameServer.write(playerOutput);
-  println(playerOutput.length());
 }
 
 /* Processing will call this when a key is pressed. */
