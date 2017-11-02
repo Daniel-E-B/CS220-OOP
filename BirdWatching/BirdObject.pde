@@ -3,9 +3,14 @@ abstract class BirdObject{
   float xSpeed;
   float x;
   float y;
-  color fillColor;
+  float size;
   BirdObject(){
-    this.fillColor = color(random(0,255), random(0,255), random(0,255));
     this.x = random(0, width);
   }
+  
+  void display() {
+    imageMode(CENTER);
+    image(this.img, this.x, this.y, width/this.size, height/this.size);
+  }
+  void move(){}
 }

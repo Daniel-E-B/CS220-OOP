@@ -1,23 +1,23 @@
 //All images from openclipart.org. October 2, 2017
-ArrayList<Creature> creatures = new ArrayList<Creature>();
+ArrayList<BirdObject> birdObjects = new ArrayList<BirdObject>();
 
 void setup() {
   noStroke();
   size(600, 400);
   
   for(int i=0; i<5; ++i){
-    creatures.add(new SoaringBird());
-    creatures.add(new FlittingBird());
-    creatures.add(new FallingFeather());
-    creatures.add(new FallingFeather());
+    birdObjects.add(new SoaringBird());
+    birdObjects.add(new FlittingBird());
+    birdObjects.add(new FallingFeather());
+    birdObjects.add(new FallingFeather());
   }
 }
 
 void draw() {
   background(173,216,230);
   
-  for(Creature creature: creatures){
-    creature.move();
-    creature.display();
+  for(BirdObject bird: birdObjects){
+    bird.move();
+    bird.display();
   }
 }

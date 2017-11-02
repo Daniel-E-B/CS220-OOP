@@ -1,4 +1,4 @@
-class FallingFeather extends BirdObject implements Creature{
+class FallingFeather extends BirdObject{
   float ySpeed;
   float size = 6.0;
 
@@ -11,7 +11,6 @@ class FallingFeather extends BirdObject implements Creature{
   }
   
   void display() {
-    fill(this.fillColor);
     imageMode(CORNER);
     image(this.img, this.x, this.y, width/this.size, height/this.size);
   }
@@ -19,13 +18,12 @@ class FallingFeather extends BirdObject implements Creature{
   void move() {
     this.x += this.xSpeed;
     this.y += this.ySpeed;
-    // if off the bottom of the screen, move to the top
     if (this.y > height) {
       this.y = -this.size;
     }
-    // about 5% of the time,
-    // or if going off the left or right of the screen,
-    // reverse x direction
+    /* about 5% of the time,
+     or if going off the left or right of the screen,
+     reverse x direction */
     if (random(0, 1) > 0.95 || this.x < -this.size || this.x > width) {
       this.xSpeed = -this.xSpeed;
     }
