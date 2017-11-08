@@ -1,16 +1,14 @@
 //TODO: Add collision code to the server
+import java.io.*;
+import java.net.*;
 
-import processing.net.*;
+ServerSocket serverSocket=null;
+Socket socket = null;
+ObjectInputStream inStream=null;
+
 ArrayList<Food> foods = new ArrayList<Food>();
 ArrayList<rPlayer> rPlayers = new ArrayList<rPlayer>();//r stand for remote
 int foodInterval=120;//every 120 frames, add a food;
-Server gameServer;
-Client c;
-float data[];//playerID, size, x, y, r, g, b, alive/dead
-String input;
-String foodOutput="";
-String playerOutput="";
-//The local player is always in index 0
 
 void initFood(int numfoods){
   for(int i=0; i<numfoods; ++i){
@@ -38,8 +36,7 @@ void reset() {
 */
 void setup() {
   size(1024, 768);
-  gameServer = new Server(this, 24342);
-  frameRate(60);
+  frameRate(5);
   initFood(height/25);
   noStroke();
   textMode(CENTER);
@@ -54,6 +51,30 @@ void setup() {
 */
 void draw() {
     background(255, 255, 255);
+    //read in players
+    //TODO:
+    /*
+    since players handle eating food, make them transmit any food they ate?
+    maybe in a separate object, and if we can read in that object, then delete the food[i] that they ate? idk...
+    */
+    try{
+      serverSocket=new ServerSocket(24342);
+      serverSocket.accept();
+      inStream=new ObjectInputStream(socket.getInputStream());
+      rPlayer inPlayer = (rPlayer)inStream.readObject();//what is this syntax??
+      boolean flag=false;
+      for(rPlayer p : rPlayers){
+        if(p.playerID==inPlayer.playerID){
+          flag=true;
+        }
+      }
+      if(flag==false){//if the incoming player is new; TODO: make a way to delete players that are inactive/left
+        rPlayers.add(inPlayer);
+      }
+      socket.close();
+    }catch(IOException e){}
+    catch(ClassNotFoundException cnf){}
+    catch(NullPointerException e){}
     
      for(int i=0; i<rPlayers.size();++i){
        //check if players ate each other
@@ -87,81 +108,20 @@ void draw() {
          pIterator.remove();
        }
      }
-    
-    c=gameServer.available();
-    if(c!=null){
-      //receive player from client
-      input = c.readString();//stick this all in a class    
-      data = float(split(input, ' '));  // Split values into an array
-      //the data array is twice as long as its supposed to be!! (0-14 indexes)
-      //check that it is a full packet
-      try{ float temp = data[7]; } catch(ArrayIndexOutOfBoundsException e){
-        println("array index out of bounds, dropped packet", e);
-      }/*bad form. If I change the size of data, I need to change this.
-      if the player is already in the arraylist, update them. */
-      boolean inSystem=false;
-      for(int i=0; i<rPlayers.size(); ++i){
-        if(rPlayers.get(i).playerID==data[0]){
-          rPlayers.set(i, new rPlayer(data[0],data[1],data[2],data[3],data[4],data[5],data[6],data[7]));
-          inSystem=true;
-        }
-    }
-    if(inSystem==false){//if the plater is not in the system, add them
-      try{
-        rPlayers.add(new rPlayer(data[0],data[1],data[2],data[3],data[4],data[5],data[6],data[7]));
-      }catch(ArrayIndexOutOfBoundsException e){println("Couldn't create rPlayer instance",e);}
-      inSystem=true;
-    }
-   }
-  ++foodInterval;
-  //write the food array out to the clients
-  //parse the food array into a string
-  //for every food, the constructor only needs an x and a y
-  foodOutput="";
-  //the first part of the array should be FOOD
-  foodOutput+="FOOD ";
-  //send the number of foods (for dropped packet checking)
-  foodOutput+=String.valueOf(foods.size());
-  foodOutput+=" ";
-  for(Food f : foods){
-    foodOutput+=(f.x);
-    foodOutput+=(",");//separate coordinates by ","
-    foodOutput+=(f.y);
-    foodOutput+=(",");
-    foodOutput+=(f.alive);
-    foodOutput+=(" ");//terminate with a " "
-  }
-  gameServer.write(foodOutput);
-  gameServer.write(";");//separate the foodoutput and the player output
-  //write the players out to the clients (including the client that is came from)
-  //the clients should ignore the x and y that they get back from the server, but use all of the other stuff
-  playerOutput="";
-  //the first part of the array should be PLAYERS
-  playerOutput+="PLAYERS ";
-  //send the number of players (for dropped packet checking)
-  playerOutput+=String.valueOf(rPlayers.size());
-  for(rPlayer p : rPlayers){
-    //parse out and separate by "," for same player parameters
-    //spearate by " " for separation between players
-    playerOutput+=(p.playerID);
-    println(p.playerID);
-    playerOutput+=",";
-    playerOutput+=(p.radius);
-    playerOutput+=",";
-    playerOutput+=(p.x);
-    playerOutput+=",";
-    playerOutput+=(p.y);
-    playerOutput+=",";
-    playerOutput+=(p.r);
-    playerOutput+=",";
-    playerOutput+=(p.g);
-    playerOutput+=",";
-    playerOutput+=(p.b);
-    playerOutput+=",";
-    playerOutput+=(p.alive);
-    playerOutput+=" ";
-  }
-  gameServer.write(playerOutput);
+    //send out players
+    try{
+      ObjectOutputStream pOut=new ObjectOutputStream(socket.getOutputStream());
+      for(rPlayer outPlayer : rPlayers){
+        pOut.writeObject(outPlayer);
+      }
+    }catch(IOException e){}
+     catch(NullPointerException e){}
+    //send out foods
+    try{
+      ObjectOutputStream fOut=new ObjectOutputStream(socket.getOutputStream());
+      fOut.writeObject(foods);
+    }catch(IOException e){}
+     catch(NullPointerException e){}
 }
 
 /* Processing will call this when a key is pressed. */
