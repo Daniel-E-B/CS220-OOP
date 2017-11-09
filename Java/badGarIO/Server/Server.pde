@@ -72,9 +72,10 @@ void draw() {
         rPlayers.add(inPlayer);
       }
       socket.close();
-    }catch(IOException e){}
-    catch(ClassNotFoundException cnf){}
-    catch(NullPointerException e){}
+    }catch(IOException e){println( e);}
+    catch(ClassNotFoundException cnf){println( cnf);}
+    catch(NullPointerException e){println( e);}
+    finally{try{socket.close();}catch(Exception y){println(y);}}
     
      for(int i=0; i<rPlayers.size();++i){
        //check if players ate each other
@@ -114,14 +115,16 @@ void draw() {
       for(rPlayer outPlayer : rPlayers){
         pOut.writeObject(outPlayer);
       }
-    }catch(IOException e){}
-     catch(NullPointerException e){}
+      flush();
+    }catch(IOException e){println( e);}
+     catch(NullPointerException e){println( e);}
     //send out foods
     try{
       ObjectOutputStream fOut=new ObjectOutputStream(socket.getOutputStream());
       fOut.writeObject(foods);
-    }catch(IOException e){}
-     catch(NullPointerException e){}
+      flush();
+    }catch(IOException e){println( e);}
+     catch(NullPointerException e){println( e);}
 }
 
 /* Processing will call this when a key is pressed. */

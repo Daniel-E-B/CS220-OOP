@@ -1,4 +1,4 @@
-class rPlayer extends Eatable{
+class rPlayer extends Eatable implements Serializable{
   float playerID;
   float radius;
   float x;
@@ -7,6 +7,8 @@ class rPlayer extends Eatable{
   float g;
   float b;
   float alive;
+  
+  private static final long serialVersionUID=423085672398756234L;
   
   rPlayer(float id, float radius, float x, float y, float r, float g, float b, float alive){
     this.playerID=id;

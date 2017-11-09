@@ -12,6 +12,7 @@ rPlayer localrPlayer;
 int numPlayers,numFoods;
 
 void setup() {
+  println("new");
   size(1024, 768);
   localPlayer=(new Player(random(0,width), random(0,height)));
   frameRate(60);
@@ -30,14 +31,15 @@ void draw() {
        
        outStream=new ObjectOutputStream(socket.getOutputStream());
        outStream.writeObject(localrPlayer);
+       flush();
        println('a');//this is never printed???
        inStream=new ObjectInputStream(socket.getInputStream());
        println("s");//this code never gets run???
        rPlayer inPlayer=(rPlayer)inStream.readObject();
        println(inPlayer.playerID);//doesn't print anything...
        
-     }catch(IOException e){}
-      catch(ClassNotFoundException e){}
+     }catch(IOException e){println( e);}
+      catch(ClassNotFoundException e){println( e);}
    
   
   //display everything
