@@ -22,6 +22,7 @@ void setup() {
 }
 
 void draw() {
+  println("drawing");
    localrPlayer=new rPlayer(localPlayer.playerID,localPlayer.radius,localPlayer.x,
                 localPlayer.y,localPlayer.r,localPlayer.g,localPlayer.b,1);
      try{
@@ -32,9 +33,9 @@ void draw() {
        outStream=new ObjectOutputStream(socket.getOutputStream());
        outStream.writeObject(localrPlayer);
        flush();
-       println('a');//this is never printed???
-       inStream=new ObjectInputStream(socket.getInputStream());
-       println("s");//this code never gets run???
+       println('a');//executes up to here
+       inStream=new ObjectInputStream(socket.getInputStream());//this is blocking
+       println("s");
        rPlayer inPlayer=(rPlayer)inStream.readObject();
        println(inPlayer.playerID);//doesn't print anything...
        

@@ -1,4 +1,4 @@
-class rPlayer extends Eatable implements Serializable{
+static class rPlayer implements Serializable{
   float playerID;
   float radius;
   float x;

@@ -50,6 +50,7 @@ void setup() {
    method at a set refresh rate.
 */
 void draw() {
+  println("drawing");
     background(255, 255, 255);
     //read in players
     //TODO:
@@ -59,9 +60,14 @@ void draw() {
     */
     try{
       serverSocket=new ServerSocket(24342);
+      println("madesocket");
       serverSocket.accept();
-      inStream=new ObjectInputStream(socket.getInputStream());
+      println("accepted");//gets to here
+      inStream=new ObjectInputStream(socket.getInputStream());//the instream is the problem on the client and the server
+      println("made instream");
       rPlayer inPlayer = (rPlayer)inStream.readObject();//what is this syntax??
+      println("read object",inPlayer.playerID);
+      exit();
       boolean flag=false;
       for(rPlayer p : rPlayers){
         if(p.playerID==inPlayer.playerID){
@@ -71,22 +77,21 @@ void draw() {
       if(flag==false){//if the incoming player is new; TODO: make a way to delete players that are inactive/left
         rPlayers.add(inPlayer);
       }
-      socket.close();
     }catch(IOException e){println( e);}
     catch(ClassNotFoundException cnf){println( cnf);}
     catch(NullPointerException e){println( e);}
-    finally{try{socket.close();}catch(Exception y){println(y);}}
+    finally{try{socket.close();}catch(Exception y){println(y,"sdfs");}}//boy is that ugly
     
      for(int i=0; i<rPlayers.size();++i){
        //check if players ate each other
        for(int p=i+1; p<rPlayers.size(); ++p){
-         //eat people
-         rPlayers.get(i).r+=rPlayers.get(i).eatPlayer(rPlayers.get(i),rPlayers)/PI;
+         //eat people... rPlayer no longer extends eatable, so fix it
+         //rPlayers.get(i).r+=rPlayers.get(i).eatPlayer(rPlayers.get(i),rPlayers)/PI;
        }
        //check if players ate food
        for(int f=0; f<foods.size(); ++f){
-        //eat food
-        rPlayers.get(i).r+=rPlayers.get(i).eatFood(rPlayers.get(i),foods)/PI;
+        //eat food... rPlayer no longer extends eatable for reasons
+        //rPlayers.get(i).r+=rPlayers.get(i).eatFood(rPlayers.get(i),foods)/PI;
        }
     }
      //update food array
