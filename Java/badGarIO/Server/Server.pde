@@ -4,6 +4,7 @@ import java.net.*;
 
 ServerSocket serverSocket=null;
 Socket socket = null;
+ObjectOutputStream outStream=null;
 ObjectInputStream inStream=null;
 
 ArrayList<Food> foods = new ArrayList<Food>();
@@ -42,6 +43,12 @@ void setup() {
   textMode(CENTER);
   textAlign(CENTER);
   initFood(500);
+  try{
+          serverSocket=new ServerSocket(24342);
+      println("madesocket");
+      serverSocket.accept();
+      println("accepted");//gets to here
+  }catch(Exception e){println(e);}
 }
 
 /* 
@@ -59,10 +66,7 @@ void draw() {
     maybe in a separate object, and if we can read in that object, then delete the food[i] that they ate? idk...
     */
     try{
-      serverSocket=new ServerSocket(24342);
-      println("madesocket");
-      serverSocket.accept();
-      println("accepted");//gets to here
+      ObjectOutputStream outStream=new ObjectOutputStream(socket.getOutputStream());//this is here because it has to go
       inStream=new ObjectInputStream(socket.getInputStream());//the instream is the problem on the client and the server
       println("made instream");
       rPlayer inPlayer = (rPlayer)inStream.readObject();//what is this syntax??
@@ -116,17 +120,17 @@ void draw() {
      }
     //send out players
     try{
-      ObjectOutputStream pOut=new ObjectOutputStream(socket.getOutputStream());
+      ObjectOutputStream outStream=new ObjectOutputStream(socket.getOutputStream());
       for(rPlayer outPlayer : rPlayers){
-        pOut.writeObject(outPlayer);
+        outStream.writeObject(outPlayer);
       }
       flush();
     }catch(IOException e){println( e);}
      catch(NullPointerException e){println( e);}
     //send out foods
     try{
-      ObjectOutputStream fOut=new ObjectOutputStream(socket.getOutputStream());
-      fOut.writeObject(foods);
+      ObjectOutputStream outStream=new ObjectOutputStream(socket.getOutputStream());
+      outStream.writeObject(foods);
       flush();
     }catch(IOException e){println( e);}
      catch(NullPointerException e){println( e);}

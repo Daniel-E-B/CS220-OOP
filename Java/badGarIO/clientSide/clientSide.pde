@@ -2,8 +2,8 @@ import java.io.*;
 import java.net.*;
 
 Socket socket=null;
-ObjectInputStream inStream = null;
 ObjectOutputStream outStream=null;
+ObjectInputStream inStream = null;
 
 ArrayList<Food> foods = new ArrayList<Food>();//this doesn't control food, but needs to draw it
 ArrayList<rPlayer> rPlayers = new ArrayList<rPlayer>();
