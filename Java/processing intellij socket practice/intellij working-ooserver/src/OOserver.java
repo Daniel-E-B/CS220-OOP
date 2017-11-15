@@ -47,6 +47,10 @@ public class OOserver extends PApplet {
         this.clear();
         //outData.a++;
         println("c");
+        fill(0);
+        //why doesnt the text show up? what am i doing wrong now?
+        try{text("inData: "+inData.a, 12, 12); } // Default depth, no z-value specified
+        catch(Exception e){println("no indata to show");}
 
         try{
             println("0.9");
@@ -54,13 +58,13 @@ public class OOserver extends PApplet {
             out=new ObjectOutputStream(pipe.getOutputStream());
             println("1");
             out.writeObject(outData);
+            println("outData: ",outData.a);
             in=new ObjectInputStream(pipe.getInputStream());
 
             while((inData=(Data) in.readObject())!=null){
                 println("indata: ", inData.a);
             }
-
-            pipe.close();
+             pipe.close();
             in.close();
         }catch(Exception e){println("s",e);}
 
