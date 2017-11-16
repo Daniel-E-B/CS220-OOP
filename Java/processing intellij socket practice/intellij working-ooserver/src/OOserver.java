@@ -8,6 +8,7 @@ import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 import processing.core.PApplet;
+import java.util.ArrayList;
 
 public class OOserver extends PApplet {
     Data outData;
@@ -16,6 +17,31 @@ public class OOserver extends PApplet {
     ObjectInputStream in;
     ObjectOutputStream out;
     Socket pipe;
+
+    ArrayList<Food> foods = new ArrayList<Food>();
+    ArrayList<rPlayer> rPlayers = new ArrayList<rPlayer>();//r stand for remote
+    int foodInterval=120;//every 120 frames, add a food;
+
+    //TODO: I could make a class GameManager to contain the following functions
+    public void initFood(int numfoods){
+        for(int i=0; i<numfoods; ++i){
+            foods.add(new Food(random(0,width),random(0,height), random(height/100)));
+        }
+    }
+
+    public void addFood(){
+        if(foodInterval>=120){
+            foods.add(new Food(random(0, width), random(0, height), random(height/100)));
+            foodInterval=0;
+        }
+    }
+
+    /* Clear all game objects. */
+    public void reset() {
+        rPlayers = new ArrayList<rPlayer>();
+        foods = new ArrayList<Food>();
+        initFood(height/25);
+    }
 
     public static void main(String[] args) {
         PApplet.main("OOserver");
@@ -30,6 +56,13 @@ public class OOserver extends PApplet {
     public void setup() {
         outData=new Data();
         println("0");
+
+        initFood(height/25);
+        noStroke();
+        textMode(CENTER);
+        textAlign(CENTER);
+        initFood(500);
+
         try{
             println("0.5");
             //TODO: make it work with multiple clients
@@ -43,8 +76,8 @@ public class OOserver extends PApplet {
 
     @Override
     public void draw() {
-        background(0,255,0);
-        //outData.a++;
+        background(255);
+        ++foodInterval;
         println("c");
         fill(0);
         //why doesnt the text show up? what am i doing wrong now?
