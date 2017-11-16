@@ -1,4 +1,4 @@
-#VERY IMPORTANT (if you want to find the most working BadGarIO Code)
+# VERY IMPORTANT (if you want to find the most working BadGarIO Code)
 
 It is under root/Java/processing intellij socket practice
 
