@@ -17,15 +17,13 @@ public class OOclient extends PApplet {
     Socket socket;
 
     @Override
-    public void settings() {
-        // TODO: Customize screen size and so on here
-        size(50, 50);
+    public void settings(){
+        this.size(150,150);
     }
 
     @Override
     public void setup() {
         // TODO: Your custom drawing and setup on applet start belongs here
-        clear();
         outData=new Data();
         println("0");
         try{
@@ -37,7 +35,8 @@ public class OOclient extends PApplet {
     @Override
     public void draw() {
         // TODO: Do your drawing for each frame here
-        clear();
+        background(0,255,0);
+        rect(30, 20, 55, 55);
         outData.a++;
         outData.a++;
         println("c");
@@ -51,9 +50,11 @@ public class OOclient extends PApplet {
             println("outData: ",outData.a);
             in=new ObjectInputStream(socket.getInputStream());
 
-            while((inData=(Data) in.readObject())!=null){
+           /* while((inData=(Data) in.readObject())!=null){
                 println("inData: ",inData.a);
-            }
+            }*/
+            inData=(Data) in.readObject();
+            println("indata: ", inData.a);
 
             /*socket.close();
             out.close();

@@ -22,14 +22,12 @@ public class OOserver extends PApplet {
     }
 
     @Override
-    public void settings() {
-        // TODO: Customize screen size and so on here
-        size(50, 50);
+    public void settings(){
+        size(150,150);
     }
 
     @Override
     public void setup() {
-        this.clear();
         outData=new Data();
         println("0");
         try{
@@ -44,7 +42,7 @@ public class OOserver extends PApplet {
 
     @Override
     public void draw() {
-        this.clear();
+        background(0,255,0);
         //outData.a++;
         println("c");
         fill(0);
@@ -61,11 +59,13 @@ public class OOserver extends PApplet {
             println("outData: ",outData.a);
             in=new ObjectInputStream(pipe.getInputStream());
 
-            while((inData=(Data) in.readObject())!=null){
+           /* while((inData=(Data) in.readObject())!=null){
                 println("indata: ", inData.a);
-            }
-             pipe.close();
-            in.close();
+            }*/
+            inData=(Data) in.readObject();
+            println("indata: ", inData.a);
+            /*pipe.close();
+            in.close();*/
         }catch(Exception e){println("s",e);}
 
     }
