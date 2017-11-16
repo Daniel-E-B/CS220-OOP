@@ -38,7 +38,6 @@ public class OOclient extends PApplet {
         background(0,255,0);
         rect(30, 20, 55, 55);
         outData.a++;
-        outData.a++;
         println("c");
 
         try{
@@ -50,9 +49,6 @@ public class OOclient extends PApplet {
             println("outData: ",outData.a);
             in=new ObjectInputStream(socket.getInputStream());
 
-           /* while((inData=(Data) in.readObject())!=null){
-                println("inData: ",inData.a);
-            }*/
             inData=(Data) in.readObject();
             println("indata: ", inData.a);
 

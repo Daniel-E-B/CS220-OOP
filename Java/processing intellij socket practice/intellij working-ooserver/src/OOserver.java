@@ -32,6 +32,7 @@ public class OOserver extends PApplet {
         println("0");
         try{
             println("0.5");
+            //TODO: make it work with multiple clients
             sSocket = new ServerSocket(1234);
             println("0.75, waiting for a connection");
             pipe=sSocket.accept();
@@ -59,9 +60,6 @@ public class OOserver extends PApplet {
             println("outData: ",outData.a);
             in=new ObjectInputStream(pipe.getInputStream());
 
-           /* while((inData=(Data) in.readObject())!=null){
-                println("indata: ", inData.a);
-            }*/
             inData=(Data) in.readObject();
             println("indata: ", inData.a);
             /*pipe.close();
