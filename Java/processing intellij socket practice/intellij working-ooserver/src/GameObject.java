@@ -3,6 +3,7 @@ import processing.core.*;
 class GameObject extends PApplet{
     float x;
     float y;
+    float r,g,b;
     int fillColor;//even though this gets set to a color, it is an int for now... yay processing in intellij!
     float radius;
     float speed=0;

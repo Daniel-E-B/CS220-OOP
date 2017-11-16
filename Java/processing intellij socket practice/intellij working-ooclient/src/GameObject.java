@@ -3,11 +3,13 @@ import processing.core.*;
 class GameObject extends PApplet{
     float x;
     float y;
+    float r,g,b;
     int fillColor;//even though this gets set to a color, it is an int for now... yay processing in intellij!
     float radius;
     float speed=0;
     boolean die=false;
     Eatable eatCheck = new Eatable();
+    Collidable collision = new Collidable(true);
 
     /*
       Create a new circle at the given x,y point with a
