@@ -16,8 +16,11 @@ public class HuntManager {
     private ArrayList<Predator> predators;
     private ArrayList<Prey> preys;
     PApplet parent;
+    private long frames;
+    private int numPreys;
 
     HuntManager(int numPreys, int numPredators, PApplet parent) {
+        this.numPreys=numPreys;
         this.parent=parent;
         predators = new ArrayList<>();
         preys = new ArrayList<>();
@@ -32,7 +35,29 @@ public class HuntManager {
 
     public void gameTick(){
         updateCreatures();
+        ++this.frames;
+        manageHealth();
+        manageCollisions();
     }
+
+    private void manageHealth(){
+        if(this.frames>=10) {
+            for (Predator predator : predators) {
+                --predator.health;
+            }
+            this.frames=0;
+        }
+        if(preys.size()<numPreys){//make sure there are always enough prey
+            preys.add(new Prey(this.parent));
+        }
+        //make it so that if predator's health is over 150, they have a baby and loses 100 health
+        //also kill dead ones
+    }
+
+    private void manageCollisions(){
+        //if a predator eats a prey, it gains 25 health
+    }
+
     public void displayCreatures(){
         for(Prey prey : preys){
             prey.display();
@@ -82,8 +107,8 @@ public class HuntManager {
         double angle;
         float dX = x1 - x2;
         float dY = y1 - y2;
-        angle = Math.toDegrees(Math.atan2(dX,dY));
-        //doesnt work so well
+        angle = (Math.atan2(dX,dY));
+        //doesnt work so well?
         return angle;
     }
 
