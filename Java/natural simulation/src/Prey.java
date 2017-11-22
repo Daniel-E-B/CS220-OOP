@@ -5,7 +5,7 @@ public class Prey extends Creature {
     Prey(PApplet parent){
         super(parent);
         this.SIZE=this.p.height/30;
-        this.SPEED=10;
+        this.SPEED=5;
     }
 
     @Override

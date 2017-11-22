@@ -15,16 +15,18 @@ public class HuntManager {
      */
     private ArrayList<Predator> predators;
     private ArrayList<Prey> preys;
+    PApplet parent;
 
     HuntManager(int numPreys, int numPredators, PApplet parent) {
+        this.parent=parent;
         predators = new ArrayList<>();
         preys = new ArrayList<>();
 
         for (int i = 0; i < numPreys; ++i) {
-            preys.add(new Prey(parent));
+            preys.add(new Prey(this.parent));
         }
         for (int i = 0; i < numPredators; ++i) {
-            predators.add(new Predator(parent));
+            predators.add(new Predator(this.parent));
         }
     }
 
@@ -42,16 +44,52 @@ public class HuntManager {
 
     private void updateCreatures(){
         for(Predator predator : predators){
-            //run a float function that gives me the angle to the nearest thingy
-            float angle=0;//it should = that function
+            float angle=angleToClosestPrey(predator);
             //0 is down
             predator.update(angle);
         }
         for(Prey prey : preys){
-            //run a float function that gives me the angle to the nearest thingy
-            float angle=0;//it should = that function
+            float angle=angleFromClosestPredator(prey);
             prey.update(angle);
         }
+    }
+
+    private float angleFromClosestPredator(Prey prey){
+        double distanceOfClosest=this.parent.width;
+        Predator closest=null;
+        for(Predator predator: predators){
+            if(distance(prey.x,predator.x,prey.y,predator.y)<distanceOfClosest){
+                closest=predator;
+                distanceOfClosest=distance(prey.x,predator.x,prey.y,predator.y);
+            }
+        }
+        return (float)angleToPoint(prey.x,closest.x,prey.y,closest.y)-180;
+    }
+
+    private float angleToClosestPrey(Predator predator){
+        double distanceOfClosest=this.parent.width;
+        Prey closest=null;
+        for(Prey prey: preys){
+            if(distance(predator.x,prey.x,predator.y,prey.y)<distanceOfClosest){
+                closest=prey;
+                distanceOfClosest=distance(predator.x,prey.x,predator.y,prey.y);
+            }
+        }
+        return (float)angleToPoint(predator.x,closest.x,predator.y,closest.y);
+    }
+
+    private double angleToPoint(float x1, float x2, float y1, float y2){
+        double angle;
+        float dX = x1 - x2;
+        float dY = y1 - y2;
+        angle = Math.toDegrees(Math.atan2(dX,dY));
+        //doesnt work so well
+        return angle;
+    }
+
+    private double distance(float x1, float x2, float y1, float y2){
+        double distance=Math.sqrt(Math.pow((x1-x2),2)+Math.pow((y1-y2),2));
+        return(distance);
     }
 }
 

@@ -41,8 +41,8 @@ abstract class Creature {
     }
 
     private void move(){
-        this.x += this.SPEED * Math.sin(this.angle);
-        this.y += this.SPEED * Math.cos(this.angle);
+        this.y += this.SPEED * Math.sin(this.angle);
+        this.x += this.SPEED * Math.cos(this.angle);
         //wrap around edges:
         //if it goes off of top:
         if(this.y<0+this.SIZE/2){

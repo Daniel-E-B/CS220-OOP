@@ -17,7 +17,7 @@ public class Main extends PApplet {
     @Override
     public void setup() {
         // TODO: Your custom drawing and setup on applet start belongs here
-        manager=new HuntManager(1000,1000,this);
+        manager=new HuntManager(10,10,this);
         //predators arent drawing
         frameRate(60);
     }
