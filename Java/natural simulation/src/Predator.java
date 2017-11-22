@@ -5,12 +5,9 @@ public class Predator extends Creature{
 
     Predator(PApplet parent){
         super(parent);
-        this.SPEED=10;
+        this.SIZE=this.p.height/25;
+        this.SPEED=4;
     }
 
-    @Override
-    public void display(){
-
-    }
 
 }

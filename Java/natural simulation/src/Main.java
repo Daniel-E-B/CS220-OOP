@@ -7,7 +7,7 @@ public class Main extends PApplet {
         PApplet.main("Main");
     }
 
-    Prey prey;
+    HuntManager manager;
 
     @Override
     public void settings(){
@@ -17,13 +17,14 @@ public class Main extends PApplet {
     @Override
     public void setup() {
         // TODO: Your custom drawing and setup on applet start belongs here
-        prey=new Prey(this);
+        manager=new HuntManager(1000,1000,this);
+        //predators arent drawing
         frameRate(60);
     }
     public void draw() {
         // TODO: Do your drawing for each frame here
         background(255,255,255);
-        prey.update();
-        prey.display();
+        manager.gameTick();
+        manager.displayCreatures();
     }
 }

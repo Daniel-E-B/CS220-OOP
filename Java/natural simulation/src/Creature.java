@@ -11,7 +11,7 @@ abstract class Creature {
     float SPEED;
     float angle;
     boolean dead;
-    Random rand = new Random();
+    private Random rand = new Random();
     Creature(PApplet parent){
         this.p=parent;
         this.x= rand.nextInt(p.width)+0;
@@ -20,19 +20,22 @@ abstract class Creature {
         this.dead=false;
         this.angle=this.rand.nextInt(360);
     }
-    public void update(){
-        this.updateHealthColor();
+    public void update(float direction){
+        this.angle=direction;
         this.checkDead();
         this.move();
     }
-    public void display(){}
+    public void display(){
+        this.updateHealthColor();
+        this.p.ellipse(this.x,this.y,this.SIZE,this.SIZE);
+    }
 
     private void checkDead(){
         if(this.health<=0){
             this.dead=true;
         }
     }
-    private void updateHealthColor(){
+    protected void updateHealthColor(){
         this.healthColor=this.p.color(255-(float)(health*2.55), (float)(health*2.55),0);
         this.p.fill(healthColor);
     }
@@ -42,19 +45,19 @@ abstract class Creature {
         this.y += this.SPEED * Math.cos(this.angle);
         //wrap around edges:
         //if it goes off of top:
-        if(this.y<=0+this.SIZE/2){
+        if(this.y<0+this.SIZE/2){
             this.y=this.p.height-this.SIZE/2;
         }
         //if it goes off of bottom:
-        else if(this.y>=this.p.height-this.SIZE/2){
+        else if(this.y>this.p.height-this.SIZE/2){
             this.y=0+this.SIZE/2;
         }
         //if it goes off to left:
-        if(this.x<=0+this.SIZE/2){
+        if(this.x<0+this.SIZE/2){
             this.x=this.p.width-this.SIZE/2;
         }
         //if it goes off to right:
-        else if(this.x>=this.p.width-this.SIZE/2){
+        else if(this.x>this.p.width-this.SIZE/2){
             this.x=0+this.SIZE/2;
         }
     }
