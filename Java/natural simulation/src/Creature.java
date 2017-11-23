@@ -30,7 +30,7 @@ abstract class Creature {
         this.p.ellipse(this.x,this.y,this.SIZE,this.SIZE);
     }
 
-    private void checkDead(){
+    private void checkDead(){//DEPRECATED?
         if(this.health<=0){
             this.dead=true;
         }
