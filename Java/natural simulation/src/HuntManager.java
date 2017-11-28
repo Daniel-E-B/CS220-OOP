@@ -70,7 +70,8 @@ public class HuntManager {
     private void updateCreatures(){
         for(Predator predator : predators){
             float angle=angleToClosestPrey(predator);
-            //0 is down
+            //90 is down
+            //is there a radians degrees problem
             predator.update(angle);
         }
         for(Prey prey : preys){
@@ -88,7 +89,7 @@ public class HuntManager {
                 distanceOfClosest=distance(prey.x,predator.x,prey.y,predator.y);
             }
         }
-        return (float)angleToPoint(prey.x,closest.x,prey.y,closest.y)-180;
+        return (float)angleToPoint(prey.x,closest.x,prey.y,closest.y);
     }
 
     private float angleToClosestPrey(Predator predator){
@@ -100,14 +101,14 @@ public class HuntManager {
                 distanceOfClosest=distance(predator.x,prey.x,predator.y,prey.y);
             }
         }
-        return (float)angleToPoint(predator.x,closest.x,predator.y,closest.y);
+        return (float)angleToPoint(predator.x,closest.x,predator.y,closest.y)-(float)Math.toRadians(180);
     }
 
     private double angleToPoint(float x1, float x2, float y1, float y2){
         double angle;
         float dX = x1 - x2;
         float dY = y1 - y2;
-        angle = (Math.atan2(dX,dY));
+        angle = (Math.atan2(dY,dX));
         //doesnt work so well?
         return angle;
     }
