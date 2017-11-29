@@ -81,7 +81,7 @@ public class HuntManager {
     }
 
     private float angleFromClosestPredator(Prey prey){
-        double distanceOfClosest=this.parent.width;
+        double distanceOfClosest=this.parent.width+this.parent.height;
         Predator closest=null;
         for(Predator predator: predators){
             if(distance(prey.x,predator.x,prey.y,predator.y)<distanceOfClosest){
@@ -93,7 +93,7 @@ public class HuntManager {
     }
 
     private float angleToClosestPrey(Predator predator){
-        double distanceOfClosest=this.parent.width;
+        double distanceOfClosest=this.parent.width+this.parent.height;
         Prey closest=null;
         for(Prey prey: preys){
             if(distance(predator.x,prey.x,predator.y,prey.y)<distanceOfClosest){
