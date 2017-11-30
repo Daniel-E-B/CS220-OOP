@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import processing.core.*;
+import java.util.Iterator;
 
 public class HuntManager {
     /*this needs to handle:
@@ -18,6 +19,7 @@ public class HuntManager {
     PApplet parent;
     private long frames;
     private int numPreys;
+    private Iterator<Predator> iterator;
 
     HuntManager(int numPreys, int numPredators, PApplet parent) {
         this.numPreys=numPreys;
@@ -51,7 +53,13 @@ public class HuntManager {
             preys.add(new Prey(this.parent));
         }
         //make it so that if predator's health is over 150, they have a baby and loses 100 health
-        //also kill dead ones: <Iterator>
+        //kill the dead ones
+        iterator=predators.iterator();
+        Predator temp = new Predator(this.parent);
+        while (iterator.hasNext()) {
+            temp=iterator.next();
+            if(temp.dead==true){iterator.remove();}
+        }
     }
 
     private void manageCollisions(){
