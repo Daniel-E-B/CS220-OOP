@@ -51,7 +51,7 @@ public class HuntManager {
             preys.add(new Prey(this.parent));
         }
         //make it so that if predator's health is over 150, they have a baby and loses 100 health
-        //also kill dead ones
+        //also kill dead ones: <Iterator>
     }
 
     private void manageCollisions(){
@@ -70,8 +70,7 @@ public class HuntManager {
     private void updateCreatures(){
         for(Predator predator : predators){
             float angle=angleToClosestPrey(predator);
-            //90 is down
-            //is there a radians degrees problem
+            //90 is down?
             predator.update(angle);
         }
         for(Prey prey : preys){
@@ -81,7 +80,7 @@ public class HuntManager {
     }
 
     private float angleFromClosestPredator(Prey prey){
-        double distanceOfClosest=this.parent.width+this.parent.height;
+        double distanceOfClosest=7000;//just an arbitrary big number
         Predator closest=null;
         for(Predator predator: predators){
             if(distance(prey.x,predator.x,prey.y,predator.y)<distanceOfClosest){
@@ -93,7 +92,7 @@ public class HuntManager {
     }
 
     private float angleToClosestPrey(Predator predator){
-        double distanceOfClosest=this.parent.width+this.parent.height;
+        double distanceOfClosest=7000;//just an arbitrary big number
         Prey closest=null;
         for(Prey prey: preys){
             if(distance(predator.x,prey.x,predator.y,prey.y)<distanceOfClosest){
