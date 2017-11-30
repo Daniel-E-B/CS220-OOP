@@ -36,8 +36,8 @@
       <file leaf-file-name="HuntManager.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/HuntManager.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="267">
-              <caret line="55" column="28" lean-forward="false" selection-start-line="55" selection-start-column="28" selection-end-line="55" selection-end-column="28" />
+            <state relative-caret-position="326">
+              <caret line="72" column="21" lean-forward="false" selection-start-line="72" selection-start-column="21" selection-end-line="72" selection-end-column="21" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -48,8 +48,8 @@
       <file leaf-file-name="Predator.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Predator.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="13" lean-forward="false" selection-start-line="0" selection-start-column="13" selection-end-line="0" selection-end-column="13" />
+            <state relative-caret-position="135">
+              <caret line="9" column="23" lean-forward="false" selection-start-line="9" selection-start-column="23" selection-end-line="9" selection-end-column="23" />
               <folding />
             </state>
           </provider>
@@ -118,11 +118,11 @@
         <option value="$PROJECT_DIR$/src/OOclient.java" />
         <option value="$PROJECT_DIR$/src/main.java" />
         <option value="$PROJECT_DIR$/src/Position.java" />
-        <option value="$PROJECT_DIR$/src/Predator.java" />
         <option value="$PROJECT_DIR$/src/Prey.java" />
         <option value="$PROJECT_DIR$/src/Creature.java" />
         <option value="$PROJECT_DIR$/src/Main.java" />
         <option value="$PROJECT_DIR$/src/HuntManager.java" />
+        <option value="$PROJECT_DIR$/src/Predator.java" />
       </list>
     </option>
   </component>
@@ -563,14 +563,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Position.java" />
-    <entry file="file://$PROJECT_DIR$/src/Prey.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="7" column="20" lean-forward="false" selection-start-line="7" selection-start-column="20" selection-end-line="7" selection-end-column="20" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Creature.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="195">
@@ -578,14 +570,6 @@
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Predator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="13" lean-forward="false" selection-start-line="0" selection-start-column="13" selection-end-line="0" selection-end-column="13" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -597,10 +581,26 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/Prey.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="7" column="20" lean-forward="false" selection-start-line="7" selection-start-column="20" selection-end-line="7" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Predator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="9" column="23" lean-forward="false" selection-start-line="9" selection-start-column="23" selection-end-line="9" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/HuntManager.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="267">
-          <caret line="55" column="28" lean-forward="false" selection-start-line="55" selection-start-column="28" selection-end-line="55" selection-end-column="28" />
+        <state relative-caret-position="326">
+          <caret line="72" column="21" lean-forward="false" selection-start-line="72" selection-start-column="21" selection-end-line="72" selection-end-column="21" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

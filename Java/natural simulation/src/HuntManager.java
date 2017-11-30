@@ -55,10 +55,22 @@ public class HuntManager {
         //make it so that if predator's health is over 150, they have a baby and loses 100 health
         //kill the dead ones
         iterator=predators.iterator();
-        Predator temp = new Predator(this.parent);
+        Predator temp;
+        int amountToAdd=0;
         while (iterator.hasNext()) {
             temp=iterator.next();
-            if(temp.dead==true){iterator.remove();}
+            //make very healthy ones reproduce
+            if(temp.health>=150){
+                temp.health-=100;
+                ++amountToAdd;
+            }
+            //kill dead ones
+            if(temp.dead==true){
+                iterator.remove();
+            }
+        }
+        for(int i=0;i<amountToAdd;++i){
+            predators.add(new Predator(this.parent));
         }
     }
 
