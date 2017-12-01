@@ -35,6 +35,11 @@ public class HuntManager {
         }
     }
 
+    public void displayStats(){
+        parent.fill(0);
+        parent.text(predators.size()+" Creatures alive", 10, 42);
+    }
+
     public void gameTick(){
         ++this.frames;
         manageHealth();

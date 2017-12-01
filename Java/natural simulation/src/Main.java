@@ -16,6 +16,7 @@ public class Main extends PApplet {
 
     @Override
     public void setup() {
+        textSize(32);
         manager=new HuntManager(5,10,this);
         frameRate(60);
     }
@@ -23,5 +24,6 @@ public class Main extends PApplet {
         background(255,255,255);
         manager.gameTick();
         manager.displayCreatures();
+        manager.displayStats();
     }
 }
