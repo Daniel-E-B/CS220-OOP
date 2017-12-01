@@ -86,11 +86,12 @@ public class HuntManager {
     }
 
     private void manageCollisions(){
-        //if a predator eats a prey, it gains 25 health
+        //if a predator eats a prey, it gains 50 health
         for(Prey prey:preys){
             for(Predator predator:predators){
                 if(distance(prey.x,predator.x,prey.y,predator.y)<prey.SIZE/2+predator.SIZE/2){
                     prey.dead=true;//theoretically, prey can be eaten more than once b4 it dies
+                    predator.health+=50;
                 }
             }
         }

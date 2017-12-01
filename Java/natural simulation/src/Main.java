@@ -16,7 +16,7 @@ public class Main extends PApplet {
 
     @Override
     public void setup() {
-        manager=new HuntManager(1,10,this);
+        manager=new HuntManager(5,10,this);
         frameRate(60);
     }
     public void draw() {
