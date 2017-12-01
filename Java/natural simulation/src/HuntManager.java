@@ -19,14 +19,14 @@ public class HuntManager {
     PApplet parent;
     private long frames;
     private int numPreys;
-    private Iterator<Predator> iterator;
+    private Iterator<Predator> predIterator;
+    private Iterator<Prey> preyIterator;
 
     HuntManager(int numPreys, int numPredators, PApplet parent) {
         this.numPreys=numPreys;
         this.parent=parent;
         predators = new ArrayList<>();
         preys = new ArrayList<>();
-
         for (int i = 0; i < numPreys; ++i) {
             preys.add(new Prey(this.parent));
         }
@@ -36,9 +36,9 @@ public class HuntManager {
     }
 
     public void gameTick(){
-        updateCreatures();
         ++this.frames;
         manageHealth();
+        updateCreatures();
         manageCollisions();
     }
 
@@ -49,33 +49,51 @@ public class HuntManager {
             }
             this.frames=0;
         }
-        if(preys.size()<numPreys){//make sure there are always enough prey
-            preys.add(new Prey(this.parent));
-        }
         //make it so that if predator's health is over 150, they have a baby and loses 100 health
         //kill the dead ones
-        iterator=predators.iterator();
-        Predator temp;
+        predIterator=predators.iterator();
+        Predator tempPredator;//its a pointer! (reference)
         int amountToAdd=0;
-        while (iterator.hasNext()) {
-            temp=iterator.next();
+        while (predIterator.hasNext()) {
+            tempPredator=predIterator.next();
             //make very healthy ones reproduce
-            if(temp.health>=150){
-                temp.health-=100;
+            if(tempPredator.health>=150){
+                tempPredator.health-=100;
                 ++amountToAdd;
             }
             //kill dead ones
-            if(temp.dead==true){
-                iterator.remove();
+            if(tempPredator.dead==true){
+                predIterator.remove();
             }
         }
         for(int i=0;i<amountToAdd;++i){
             predators.add(new Predator(this.parent));
         }
+
+        //kill dead preys:
+        preyIterator=preys.iterator();
+        Prey tempPrey;
+        while (preyIterator.hasNext()) {
+            tempPrey=preyIterator.next();
+            //kill dead ones
+            if(tempPrey.dead==true){
+                preyIterator.remove();
+            }
+        }
+        if(preys.size()<numPreys){//make sure there are always enough prey
+            preys.add(new Prey(this.parent));
+        }
     }
 
     private void manageCollisions(){
         //if a predator eats a prey, it gains 25 health
+        for(Prey prey:preys){
+            for(Predator predator:predators){
+                if(distance(prey.x,predator.x,prey.y,predator.y)<prey.SIZE/2+predator.SIZE/2){
+                    prey.dead=true;//theoretically, prey can be eaten more than once b4 it dies
+                }
+            }
+        }
     }
 
     public void displayCreatures(){
