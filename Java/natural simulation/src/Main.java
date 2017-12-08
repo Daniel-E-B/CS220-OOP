@@ -11,13 +11,13 @@ public class Main extends PApplet {
 
     @Override
     public void settings(){
-        this.size(1000,700);
+        this.size(1280,800);
     }
 
     @Override
     public void setup() {
         textSize(32);
-        manager=new HuntManager(5,10,this);
+        manager = new HuntManager(10,20,this);
         frameRate(60);
     }
     public void draw() {
