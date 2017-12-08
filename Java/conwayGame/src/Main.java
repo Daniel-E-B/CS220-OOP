@@ -8,7 +8,7 @@ public class Main extends PApplet {
     }
 
     final int CELL_SIZE=5;
-    LifeEngine gameManager;
+    private LifeEngine gameManager;
 
     @Override
     public void settings() {
@@ -17,13 +17,12 @@ public class Main extends PApplet {
 
     @Override
     public void setup() {
-        gameManager=new LifeEngine();
+        gameManager=new LifeEngine(this);
     }
 
     @Override
     public void draw() {
-        clear();
-        fill(255);
-        rect(50, 50, 100, 100);
+        background(255);
+        gameManager.drawBoard();
     }
 }
