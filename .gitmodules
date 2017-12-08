@@ -1,0 +1,3 @@
+[submodule "Java/Java/cevi-conway"]
+	path = Java/Java/cevi-conway
+	url = https://github.com/doged4/ConwayCode.git
