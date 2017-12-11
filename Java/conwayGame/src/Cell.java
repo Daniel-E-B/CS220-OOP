@@ -4,17 +4,17 @@ public class Cell {
     public int x,y;//these are on the grid, not on the screen
     public boolean alive;
     private int color;
-    static final float SCALE=36;
-    static final float STRETCH=3;
     private float cellSize;
+    private float numCells;
 
-    PApplet parent;
+    private PApplet parent;
 
-    Cell(int x, int y, PApplet parent){
+    Cell(int x, int y, PApplet parent, float numCells){
         this.x=x;
         this.y=y;
         this.parent=parent;
-        cellSize=parent.width/SCALE/STRETCH;
+        this.cellSize=this.parent.width/numCells;
+        this.numCells=numCells;
 
         this.color=parent.color(0,100,0);
     }
@@ -26,8 +26,8 @@ public class Cell {
         this.alive=false;
     }
     public void draw(){
-        float drawX=(parent.width / SCALE) * this.x/STRETCH;
-        float drawY=(parent.width / SCALE) * this.y/STRETCH;
+        float drawX=(this.parent.width / this.numCells) * this.x;
+        float drawY=(this.parent.width / this.numCells) * this.y;
         if(this.alive==true) {
             parent.fill(this.color);
             parent.rect(drawX, drawY, this.cellSize, this.cellSize);//x, y, width, height

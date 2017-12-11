@@ -7,12 +7,11 @@ public class Main extends PApplet {
         PApplet.main("Main");
     }
 
-    final int CELL_SIZE=5;
     private LifeEngine gameManager;
 
     @Override
     public void settings() {
-        size(1280, 720);
+        size(1280, 700);
     }
 
     @Override
