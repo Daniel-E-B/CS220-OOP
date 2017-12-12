@@ -4,7 +4,7 @@ public class Cell {
     public int x,y;//these are on the grid, not on the screen
     public boolean alive;
     private int color;
-    private float cellSize;
+    static float cellSize;
     private float numCells;
     public int neighbors=0;
 
@@ -14,7 +14,7 @@ public class Cell {
         this.x=x;
         this.y=y;
         this.parent=parent;
-        this.cellSize=this.parent.width/numCells;
+        cellSize=this.parent.width/numCells;
         this.numCells=numCells;
         this.kill();
 

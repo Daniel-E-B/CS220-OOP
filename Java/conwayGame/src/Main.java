@@ -18,17 +18,34 @@ public class Main extends PApplet {
 
     @Override
     public void setup() {
-        gameManager=new LifeEngine(this, 200.0f);
+        this.gameManager=new LifeEngine(this, 100.0f);
         frameRate(15);
         //gameManager.addGlider(5,5);
-        gameManager.populateRandom();
+        this.gameManager.populateRandom();
     }
 
     @Override
     public void draw() {
         background(255);
-        gameManager.drawBoard();
-        gameManager.updateBoard();
+        this.gameManager.drawBoard();
+        this.gameManager.updateBoard();
         //try{TimeUnit.MILLISECONDS.sleep(2000);}catch(java.lang.InterruptedException e){}
+    }
+
+    public void mousePressed(){
+        if(this.gameManager.pause){
+            this.gameManager.drawInput();
+        }
+    }
+    public void keyPressed(){
+        if (key==' '&&!this.gameManager.pause){
+            this.gameManager.pause=true;
+        }else if(key==' '&&gameManager.pause){
+            this.gameManager.pause=false;
+        }else if(key=='c'){
+            gameManager.killAll();
+        }else if(key=='r'){
+            gameManager.populateRandom();
+        }
     }
 }

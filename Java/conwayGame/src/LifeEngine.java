@@ -7,6 +7,7 @@ public class LifeEngine {
     private float xCells;
     private float yCells;
     private float numCells;
+    public boolean pause=false;
 
     LifeEngine(PApplet parent, float numCells){
         this.board=new ArrayList<>();
@@ -51,51 +52,53 @@ public class LifeEngine {
     }
 
     public void updateBoard() {
-        //using indexes instead of for each in, because we need to access the members next to the cell
-        //rule: B3 S23
-        //ignore edges--its one way of doing it. flooring because stuff might not be a whole #
-        //its y then x
-        for(int i=1;i<this.board.size()-1;++i){
-            for(int j=1;j<this.board.get(i).size()-1;++j){
-                //System.out.println(j+" "+this.board.get(i).size()+" "+i+" "+this.board.size());
-                this.board.get(i).get(j).neighbors=0;
-                //check top
-                if(this.board.get(i-1).get(j).alive==true){
-                    ++this.board.get(i).get(j).neighbors;
-                }
-                //check bottom
-                if(this.board.get(i+1).get(j).alive==true){
-                    ++this.board.get(i).get(j).neighbors;
-                }
-                //check right
-                if(this.board.get(i).get(j+1).alive==true){
-                    ++this.board.get(i).get(j).neighbors;
-                }
-                //check left
-                if(this.board.get(i).get(j-1).alive==true){
-                    ++this.board.get(i).get(j).neighbors;
-                }
-                //check top left
-                if(this.board.get(i-1).get(j-1).alive==true){
-                    ++this.board.get(i).get(j).neighbors;
-                }
-                //check top right
-                if(this.board.get(i-1).get(j+1).alive==true){
-                    ++this.board.get(i).get(j).neighbors;
-                }
-                //check bottom left
-                if(this.board.get(i+1).get(j-1).alive==true){
-                    ++this.board.get(i).get(j).neighbors;
-                }
-                //check bottom right
-                if(this.board.get(i+1).get(j+1).alive==true){
-                    ++this.board.get(i).get(j).neighbors;
+        if(!pause) {
+            //using indexes instead of for each in, because we need to access the members next to the cell
+            //rule: B3 S23
+            //ignore edges--its one way of doing it. flooring because stuff might not be a whole #
+            //its y then x
+            for (int i = 1; i < this.board.size() - 1; ++i) {
+                for (int j = 1; j < this.board.get(i).size() - 1; ++j) {
+                    //System.out.println(j+" "+this.board.get(i).size()+" "+i+" "+this.board.size());
+                    this.board.get(i).get(j).neighbors = 0;
+                    //check top
+                    if (this.board.get(i - 1).get(j).alive) {
+                        ++this.board.get(i).get(j).neighbors;
+                    }
+                    //check bottom
+                    if (this.board.get(i + 1).get(j).alive) {
+                        ++this.board.get(i).get(j).neighbors;
+                    }
+                    //check right
+                    if (this.board.get(i).get(j + 1).alive) {
+                        ++this.board.get(i).get(j).neighbors;
+                    }
+                    //check left
+                    if (this.board.get(i).get(j - 1).alive) {
+                        ++this.board.get(i).get(j).neighbors;
+                    }
+                    //check top left
+                    if (this.board.get(i - 1).get(j - 1).alive) {
+                        ++this.board.get(i).get(j).neighbors;
+                    }
+                    //check top right
+                    if (this.board.get(i - 1).get(j + 1).alive) {
+                        ++this.board.get(i).get(j).neighbors;
+                    }
+                    //check bottom left
+                    if (this.board.get(i + 1).get(j - 1).alive) {
+                        ++this.board.get(i).get(j).neighbors;
+                    }
+                    //check bottom right
+                    if (this.board.get(i + 1).get(j + 1).alive) {
+                        ++this.board.get(i).get(j).neighbors;
+                    }
                 }
             }
-        }
-        for(ArrayList<Cell> outer : this.board){
-            for(Cell cell:outer){
-                cell.update();
+            for (ArrayList<Cell> outer : this.board) {
+                for (Cell cell : outer) {
+                    cell.update();
+                }
             }
         }
     }
@@ -104,6 +107,21 @@ public class LifeEngine {
         for(ArrayList<Cell> outer : this.board){
             for(Cell cell:outer){
                 cell.draw();
+            }
+        }
+    }
+
+    public void drawInput(){
+        this.board.get((int)Math.floor((this.parent.mouseY*this.numCells)/this.parent.width))
+                .get((int)Math.floor((this.parent.mouseX*this.numCells)/this.parent.width)).birth();
+
+//        float drawX=(this.parent.width / this.numCells) * this.x;
+    }
+
+    public void killAll(){
+        for(ArrayList<Cell> outer : this.board){
+            for(Cell cell:outer){
+                cell.kill();
             }
         }
     }
