@@ -16,12 +16,14 @@ public class Main extends PApplet {
 
     @Override
     public void setup() {
-        gameManager=new LifeEngine(this);
+        gameManager=new LifeEngine(this, 200.f);
+        frameRate(1);
     }
 
     @Override
     public void draw() {
         background(255);
         gameManager.drawBoard();
+        gameManager.updateBoard();
     }
 }
