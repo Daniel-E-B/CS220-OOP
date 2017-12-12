@@ -1,6 +1,8 @@
 
 import processing.core.*;
 
+import java.util.concurrent.TimeUnit;
+
 public class Main extends PApplet {
 
     public static void main(String args[]) {
@@ -16,8 +18,10 @@ public class Main extends PApplet {
 
     @Override
     public void setup() {
-        gameManager=new LifeEngine(this, 200.f);
-        frameRate(1);
+        gameManager=new LifeEngine(this, 200.0f);
+        frameRate(15);
+        //gameManager.addGlider(5,5);
+        gameManager.populateRandom();
     }
 
     @Override
@@ -25,5 +29,6 @@ public class Main extends PApplet {
         background(255);
         gameManager.drawBoard();
         gameManager.updateBoard();
+        //try{TimeUnit.MILLISECONDS.sleep(2000);}catch(java.lang.InterruptedException e){}
     }
 }

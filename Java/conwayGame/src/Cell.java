@@ -6,6 +6,7 @@ public class Cell {
     private int color;
     private float cellSize;
     private float numCells;
+    public int neighbors=0;
 
     private PApplet parent;
 
@@ -15,6 +16,7 @@ public class Cell {
         this.parent=parent;
         this.cellSize=this.parent.width/numCells;
         this.numCells=numCells;
+        this.kill();
 
         this.color=parent.color(0,100,0);
     }
@@ -34,6 +36,13 @@ public class Cell {
         }else{
             parent.fill(255);
             parent.rect(drawX, drawY, this.cellSize, this.cellSize);//x, y, width, height
+        }
+    }
+    public void update(){
+        if (this.neighbors==3) {
+            this.birth();
+        } else if(this.neighbors<=1||this.neighbors>=4) {
+            this.kill();
         }
     }
 }
