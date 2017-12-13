@@ -4,7 +4,7 @@ public class Cell {
     public int x,y;//these are on the grid, not on the screen
     public boolean alive;
     private int color;
-    static float cellSize;
+    private float cellSize;
     private float numCells;
     public int neighbors=0;
 

@@ -19,9 +19,9 @@ public class Main extends PApplet {
     @Override
     public void setup() {
         this.gameManager=new LifeEngine(this, 100.0f);
-        frameRate(15);
-        //gameManager.addGlider(5,5);
+        this.frameRate(15);
         this.gameManager.populateRandom();
+        //this.noStroke();
     }
 
     @Override
@@ -43,9 +43,9 @@ public class Main extends PApplet {
         }else if(key==' '&&gameManager.pause){
             this.gameManager.pause=false;
         }else if(key=='c'){
-            gameManager.killAll();
+            this.gameManager.killAll();
         }else if(key=='r'){
-            gameManager.populateRandom();
+            this.gameManager.populateRandom();
         }
     }
 }
