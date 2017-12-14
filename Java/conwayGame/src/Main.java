@@ -21,7 +21,6 @@ public class Main extends PApplet {
         this.gameManager=new LifeEngine(this, 100.0f);
         this.frameRate(15);
         this.gameManager.populateRandom();
-        //this.noStroke();
     }
 
     @Override
@@ -29,7 +28,6 @@ public class Main extends PApplet {
         background(255);
         this.gameManager.drawBoard();
         this.gameManager.updateBoard();
-        //try{TimeUnit.MILLISECONDS.sleep(2000);}catch(java.lang.InterruptedException e){}
     }
 
     public void mousePressed(){
@@ -41,6 +39,7 @@ public class Main extends PApplet {
             }
         }
     }
+
     public void keyPressed(){
         if (key==' '&&!this.gameManager.pause){
             this.gameManager.pause=true;

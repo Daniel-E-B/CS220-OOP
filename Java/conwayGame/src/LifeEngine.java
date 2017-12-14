@@ -54,82 +54,46 @@ public class LifeEngine {
     public void updateBoard() {
         if(!pause) {
             //these are for making the game wrap around the screen
-            ArrayList<Cell>above=new ArrayList<>();
-            ArrayList<Cell>below=new ArrayList<>();
-            ArrayList<Cell>left=new ArrayList<>();
-            ArrayList<Cell>right=new ArrayList<>();
+            Cell top=null, bottom=null, right=null, left=null, topRight=null, bottomRight=null,
+                    topLeft=null, bottomLeft=null;
             //rule: B3 S23
             //its y then x
             Cell checkCell;
-            for (int i = 0; i < this.board.size(); ++i) {
-                for (int j = 0; j < this.board.get(i).size(); ++j) {
+            for (int i = 1; i < this.board.size()-1; ++i) {
+                for (int j = 1; j < this.board.get(i).size()-1; ++j) {
 
-                    right.clear();
-                    left.clear();
-                    above.clear();
-                    below.clear();
-
-                    if(i>0&&i<this.board.size()-1){//above and below are normal
-                        above=this.board.get(i-1);//at y=i-1, get all x
-                        below=this.board.get(i+1);
-                    } else if (i==this.board.size()-1){//if the cell is on the bottom
-                        above=this.board.get(i-1);//the row above is is just the row above it
-                        below = this.board.get(0);//the row below it is the top of the screen
-                    } else if (i==0){//if the cell is on the top
-                        above = this.board.get(this.board.size()-1);//the row above it is on the bottom
-                        below = this.board.get(i+1);//the row below it is just the row below it
-                    }
-
-                    if(j > 0 && j < this.board.get(i).size()-1){//if there is space to right and left
-                        for(int k = 0; k<this.board.get(j).size();++k) {
-                            right.add(this.board.get(k).get(j+1));//at x=i+1, get all y
-                            left.add(this.board.get(k).get(j-1));
-                        }
-                    } else if (j==this.board.get(i).size()-1){//if the cell is on the right
-                        for(int k = 0; k<this.board.get(j).size();++k) {
-                            right.add(this.board.get(k).get(0));//the column on the far left of the screen. for x=0, get all y
-                            left.add(this.board.get(k).get(j-1));//just the column to the left
-                        }
-                    } else if (j==0){//if the cell is on the left
-                        for(int k = 0; k<this.board.get(j).size();++k) {
-                            right.add(this.board.get(k).get(j+1));//just the column to the right
-                            left.add(this.board.get(k).get(this.board.get(k).size()));//the column on the far right of the screen.
-                        }
-                    }
-
-                    //System.out.println(j+" "+this.board.get(i).size()+" "+i+" "+this.board.size());
                     checkCell=this.board.get(i).get(j);
                     checkCell.neighbors=0;
                     //check top
-                    if (this.board.get(i - 1).get(j).alive) {
+                    if (this.board.get(i-1).get(j).alive) {
                         ++checkCell.neighbors;
                     }
                     //check bottom
-                    if (this.board.get(i + 1).get(j).alive) {
+                    if (this.board.get(i+1).get(j).alive) {
                         ++checkCell.neighbors;
                     }
                     //check right
-                    if (this.board.get(i).get(j + 1).alive) {
+                    if (this.board.get(i).get(j+1).alive) {
                         ++checkCell.neighbors;
                     }
                     //check left
-                    if (this.board.get(i).get(j - 1).alive) {
+                    if (this.board.get(i).get(j-1).alive) {
                         ++checkCell.neighbors;
                     }
                     //check top left
-                    if (this.board.get(i - 1).get(j - 1).alive) {
+                    if (this.board.get(i-1).get(j-1).alive) {
                         ++checkCell.neighbors;
                     }
                     //check top right
-                    if (this.board.get(i - 1).get(j + 1).alive) {
+                    if (this.board.get(i-1).get(j+1).alive) {
                         ++checkCell.neighbors;
                     }
                     //check bottom left
-                    if (this.board.get(i + 1).get(j - 1).alive) {
+                    if (this.board.get(i+1).get(j-1).alive) {
                         ++checkCell.neighbors;
                     }
                     //check bottom right
-                    if (this.board.get(i + 1).get(j + 1).alive) {
+                    if (this.board.get(i+1).get(j+1).alive) {
                         ++checkCell.neighbors;
                     }
                 }
