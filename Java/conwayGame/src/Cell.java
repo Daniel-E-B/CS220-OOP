@@ -1,7 +1,7 @@
 import processing.core.*;
 
 public class Cell {
-    public int x,y;//these are on the grid, not on the screen
+    private int x,y;//these are on the grid, not on the screen
     public boolean alive;
     private int color;
     private float cellSize;

@@ -53,45 +53,53 @@ public class LifeEngine {
 
     public void updateBoard() {
         if(!pause) {
+            //these are for making the game wrap around the screen
+            ArrayList<Cell>above=new ArrayList<>();
+            ArrayList<Cell>below=new ArrayList<>();
+            ArrayList<Cell>left=new ArrayList<>();
+            ArrayList<Cell>right=new ArrayList<>();
+
             //using indexes instead of for each in, because we need to access the members next to the cell
             //rule: B3 S23
             //ignore edges--its one way of doing it. flooring because stuff might not be a whole #
             //its y then x
+            Cell checkCell;
             for (int i = 1; i < this.board.size() - 1; ++i) {
                 for (int j = 1; j < this.board.get(i).size() - 1; ++j) {
                     //System.out.println(j+" "+this.board.get(i).size()+" "+i+" "+this.board.size());
-                    this.board.get(i).get(j).neighbors = 0;
+                    checkCell=this.board.get(i).get(j);
+                    checkCell.neighbors=0;
                     //check top
                     if (this.board.get(i - 1).get(j).alive) {
-                        ++this.board.get(i).get(j).neighbors;
+                        ++checkCell.neighbors;
                     }
                     //check bottom
                     if (this.board.get(i + 1).get(j).alive) {
-                        ++this.board.get(i).get(j).neighbors;
+                        ++checkCell.neighbors;
                     }
                     //check right
                     if (this.board.get(i).get(j + 1).alive) {
-                        ++this.board.get(i).get(j).neighbors;
+                        ++checkCell.neighbors;
                     }
                     //check left
                     if (this.board.get(i).get(j - 1).alive) {
-                        ++this.board.get(i).get(j).neighbors;
+                        ++checkCell.neighbors;
                     }
                     //check top left
                     if (this.board.get(i - 1).get(j - 1).alive) {
-                        ++this.board.get(i).get(j).neighbors;
+                        ++checkCell.neighbors;
                     }
                     //check top right
                     if (this.board.get(i - 1).get(j + 1).alive) {
-                        ++this.board.get(i).get(j).neighbors;
+                        ++checkCell.neighbors;
                     }
                     //check bottom left
                     if (this.board.get(i + 1).get(j - 1).alive) {
-                        ++this.board.get(i).get(j).neighbors;
+                        ++checkCell.neighbors;
                     }
                     //check bottom right
                     if (this.board.get(i + 1).get(j + 1).alive) {
-                        ++this.board.get(i).get(j).neighbors;
+                        ++checkCell.neighbors;
                     }
                 }
             }
@@ -115,7 +123,11 @@ public class LifeEngine {
         this.board.get((int)Math.floor((this.parent.mouseY*this.numCells)/this.parent.width))
                 .get((int)Math.floor((this.parent.mouseX*this.numCells)/this.parent.width)).birth();
 
-//        float drawX=(this.parent.width / this.numCells) * this.x;
+    }
+
+    public void deleteInput(){
+        this.board.get((int)Math.floor((this.parent.mouseY*this.numCells)/this.parent.width))
+                .get((int)Math.floor((this.parent.mouseX*this.numCells)/this.parent.width)).kill();
     }
 
     public void killAll(){

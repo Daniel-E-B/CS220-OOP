@@ -34,7 +34,11 @@ public class Main extends PApplet {
 
     public void mousePressed(){
         if(this.gameManager.pause){
-            this.gameManager.drawInput();
+            if(mouseButton == LEFT) {
+                this.gameManager.drawInput();
+            }else if (mouseButton == RIGHT) {
+                this.gameManager.deleteInput();
+            }
         }
     }
     public void keyPressed(){
