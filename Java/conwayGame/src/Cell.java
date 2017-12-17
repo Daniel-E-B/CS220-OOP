@@ -18,7 +18,7 @@ public class Cell {
         this.numCells=numCells;
         this.kill();
 
-        this.color=parent.color(0,100,0);
+        this.color=parent.color((int)Math.floor(Math.random()*2)*127,(int)Math.floor(Math.random()*2)*127,(int)Math.floor(Math.random()*2)*127);
     }
 
     public void birth(){
@@ -39,7 +39,7 @@ public class Cell {
         }
     }
     public void update(){
-        if (this.neighbors==3) {
+        if (this.neighbors==2) {
             this.birth();
         } else if(this.neighbors<=1||this.neighbors>=4) {
             this.kill();

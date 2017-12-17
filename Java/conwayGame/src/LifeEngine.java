@@ -53,10 +53,7 @@ public class LifeEngine {
 
     public void updateBoard() {
         if(!pause) {
-            //these are for making the game wrap around the screen
-            Cell top=null, bottom=null, right=null, left=null, topRight=null, bottomRight=null,
-                    topLeft=null, bottomLeft=null;
-            //rule: B3 S23
+            //rule: B2 S23
             //its y then x
             Cell checkCell;
             for (int i = 1; i < this.board.size()-1; ++i) {
