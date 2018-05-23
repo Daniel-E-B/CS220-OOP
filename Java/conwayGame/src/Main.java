@@ -1,4 +1,5 @@
 import processing.core.*;
+
 import java.util.ArrayList;
 
 public class Main extends PApplet {
@@ -16,8 +17,8 @@ public class Main extends PApplet {
 
     @Override
     public void setup() {
-        this.gameManager=new LifeEngine(this, 100.0f);
-        this.frameRate(15);
+        this.gameManager = new LifeEngine(this, 100.0f);
+        this.frameRate(30);
         this.gameManager.populateRandom();
     }
 
@@ -28,24 +29,24 @@ public class Main extends PApplet {
         this.gameManager.updateBoard();
     }
 
-    public void mousePressed(){
-        if(this.gameManager.pause){
-            if(mouseButton == LEFT) {
+    public void mousePressed() {
+        if (this.gameManager.pause) {
+            if (mouseButton == LEFT) {
                 this.gameManager.drawInput();
-            }else if (mouseButton == RIGHT) {
+            } else if (mouseButton == RIGHT) {
                 this.gameManager.deleteInput();
             }
         }
     }
 
-    public void keyPressed(){
-        if (key==' '&&!this.gameManager.pause){
-            this.gameManager.pause=true;
-        }else if(key==' '&&gameManager.pause){
-            this.gameManager.pause=false;
-        }else if(key=='c'){
+    public void keyPressed() {
+        if (key == ' ' && !this.gameManager.pause) {
+            this.gameManager.pause = true;
+        } else if (key == ' ' && gameManager.pause) {
+            this.gameManager.pause = false;
+        } else if (key == 'c') {
             this.gameManager.killAll();
-        }else if(key=='r'){
+        } else if (key == 'r') {
             this.gameManager.populateRandom();
         }
     }
